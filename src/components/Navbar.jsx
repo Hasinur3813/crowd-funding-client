@@ -4,10 +4,14 @@ const Navbar = () => {
   const currentUser = false;
 
   return (
-    <div className="navbar">
-      <div className="navbar-start">
+    <div className="navbar shadow-md">
+      <div className="navbar-start !w-11/12 sm:w-1/2">
         <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+          <div
+            tabIndex={0}
+            role="button"
+            className="btn btn-ghost dark:text-white lg:hidden"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -69,7 +73,10 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        <a href="/" className="font-bold text-secondaryColor text-2xl">
+        <a
+          href="/"
+          className="font-bold text-secondaryColor text-xl sm:text-2xl"
+        >
           Crowd Funding
         </a>
       </div>
@@ -78,7 +85,7 @@ const Navbar = () => {
           <li>
             <NavLink
               to="/"
-              className="hover:text-primary font-semibold text-base text-textColor"
+              className="hover:text-primary  font-semibold text-base text-textColor dark:text-white"
             >
               Home
             </NavLink>
@@ -86,7 +93,7 @@ const Navbar = () => {
           <li>
             <NavLink
               to="/all-campaigns"
-              className="hover:text-primary font-semibold text-base text-textColor"
+              className="hover:text-primary font-semibold text-base text-textColor dark:text-white"
             >
               All Campaign
             </NavLink>
@@ -94,7 +101,7 @@ const Navbar = () => {
           <li>
             <NavLink
               to="/add-campaign"
-              className="hover:text-primary font-semibold text-base text-textColor"
+              className="hover:text-primary font-semibold text-base text-textColor dark:text-white"
             >
               Add New Campaign
             </NavLink>
@@ -102,7 +109,7 @@ const Navbar = () => {
           <li>
             <NavLink
               to="/my-campaigns"
-              className="hover:text-primary font-semibold text-base text-textColor"
+              className="hover:text-primary font-semibold text-base text-textColor dark:text-white"
             >
               My Campaign
             </NavLink>
@@ -110,19 +117,20 @@ const Navbar = () => {
           <li>
             <NavLink
               to="/my-donations"
-              className="hover:text-primary font-semibold text-base text-textColor"
+              className="hover:text-primary font-semibold text-base text-textColor dark:text-white"
             >
               My Donation
             </NavLink>
           </li>
         </ul>
       </div>
+
       <div className="navbar-end">
         {!currentUser ? (
           <div className="flex gap-2">
             <NavLink
               to="/signup"
-              className="btn  text-white bg-primaryColor hover:bg-secondaryColor rounded-lg px-6 py-2 transition duration-300 ease-in-out text-lg"
+              className="btn  text-white bg-primaryColor hover:bg-secondaryColor rounded-lg px-6 py-2 transition duration-300 hidden sm:block ease-in-out text-lg"
             >
               Register
             </NavLink>

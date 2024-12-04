@@ -15,12 +15,12 @@ const DonationAmounts = () => {
   }, []);
 
   return (
-    <section className="py-12 bg-[#f8fafc]">
+    <section className="py-12">
       <div className="container mx-auto text-center">
         <h2 className="text-3xl font-semibold text-primaryColor mb-6">
           Total Donations Raised
         </h2>
-        <p className="text-lg text-textColor mb-8">
+        <p className="text-lg text-textColor mb-8 dark:text-white">
           Thank you for your incredible generosity! Here's the total raised so
           far to support various causes. Every dollar makes a difference.
         </p>

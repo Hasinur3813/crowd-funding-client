@@ -8,12 +8,12 @@ import { Link } from "react-router-dom";
 
 const HowYouCanHelp = () => {
   return (
-    <section className="py-12 bg-[#f8fafc]">
+    <section className="py-12">
       <div className="container mx-auto text-center px-2">
         <h2 className="text-3xl font-semibold text-primaryColor mb-4">
           How You Can Make a Difference
         </h2>
-        <p className="text-lg text-textColor mb-8">
+        <p className="text-lg text-textColor mb-8 dark:text-white">
           Your contribution, no matter how small, can bring hope to those who
           need it the most.
         </p>
@@ -22,8 +22,10 @@ const HowYouCanHelp = () => {
           {/* Direct Donation */}
           <div className="card text-center p-6 border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition">
             <FaHeart className="text-4xl text-primaryColor mb-4 mx-auto" />
-            <h3 className="text-xl font-semibold mb-2">Direct Donation</h3>
-            <p className="text-sm text-gray-600 mb-4">
+            <h3 className="text-xl font-semibold mb-2 dark:text-white">
+              Direct Donation
+            </h3>
+            <p className="text-sm text-gray-600 mb-4 dark:text-gray-400">
               Your donation helps fund critical projects like providing clean
               water, education, and emergency relief. Every dollar counts!
             </p>
@@ -38,8 +40,10 @@ const HowYouCanHelp = () => {
           {/* Share Our Mission */}
           <div className="card text-center p-6 border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition">
             <FaShareAlt className="text-4xl text-primaryColor mb-4 mx-auto" />
-            <h3 className="text-xl font-semibold mb-2">Share Our Mission</h3>
-            <p className="text-sm text-gray-600 mb-4">
+            <h3 className="text-xl font-semibold mb-2 dark:text-white">
+              Share Our Mission
+            </h3>
+            <p className="text-sm text-gray-600 mb-4 dark:text-gray-400">
               Spread the word by sharing our campaigns with your friends and
               family. Your voice can help us reach more people.
             </p>
@@ -54,8 +58,10 @@ const HowYouCanHelp = () => {
           {/* Volunteer Your Time */}
           <div className="card text-center p-6 border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition">
             <FaHandsHelping className="text-4xl text-primaryColor mb-4 mx-auto" />
-            <h3 className="text-xl font-semibold mb-2">Volunteer Your Time</h3>
-            <p className="text-sm text-gray-600 mb-4">
+            <h3 className="text-xl font-semibold mb-2 dark:text-white">
+              Volunteer Your Time
+            </h3>
+            <p className="text-sm text-gray-600 mb-4 dark:text-gray-400">
               Join us in person or virtually to help with campaigns. Your time
               and effort can directly impact the success of a cause.
             </p>
@@ -70,10 +76,10 @@ const HowYouCanHelp = () => {
           {/* Fundraise for a Cause */}
           <div className="card text-center p-6 border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition">
             <FaMoneyBillWave className="text-4xl text-primaryColor mb-4 mx-auto" />
-            <h3 className="text-xl font-semibold mb-2">
+            <h3 className="text-xl font-semibold mb-2 dark:text-white">
               Fundraise for a Cause
             </h3>
-            <p className="text-sm text-gray-600 mb-4">
+            <p className="text-sm text-gray-600 mb-4 dark:text-gray-400">
               Start your own campaign to raise funds for a cause you're
               passionate about. Together, we can achieve more.
             </p>

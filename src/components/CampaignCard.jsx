@@ -14,7 +14,7 @@ const CampaignCard = ({ campaign }) => {
   };
 
   return (
-    <div className="card bg-base-100 shadow-xl">
+    <div className="card bg-base-100 dark:bg-darkMode shadow-xl ring-1 ring-primaryColor">
       <figure>
         <img
           src={campaign.image}
@@ -22,9 +22,9 @@ const CampaignCard = ({ campaign }) => {
           className="w-full h-48 object-cover"
         />
       </figure>
-      <div className="card-body !p-4 flex flex-col justify-between">
+      <div className="card-body !px-4 flex flex-col justify-between">
         <h2 className="card-title text-primaryColor">{campaign.title}</h2>
-        <p className="text-textColor mb-4 line-clamp-3">
+        <p className="text-textColor mb-4 line-clamp-3 dark:text-white">
           {campaign.description}
         </p>
 
