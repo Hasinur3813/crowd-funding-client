@@ -48,27 +48,6 @@ const CampaignDetails = () => {
       userName: currentUser.displayName,
       amount: parseFloat(donationAmount),
     };
-
-    try {
-      const response = await fetch("https://your-api-url/donations", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(donationData),
-      });
-
-      if (response.ok) {
-        Swal.fire("Thank You!", "Your donation was successful!", "success");
-        setDonationAmount("");
-      } else {
-        throw new Error("Failed to process the donation");
-      }
-    } catch (error) {
-      Swal.fire(
-        "Error",
-        "Unable to process your donation. Please try again.",
-        "error"
-      );
-    }
   };
 
   if (!campaign) {
@@ -76,55 +55,58 @@ const CampaignDetails = () => {
   }
 
   return (
-    <div className="min-h-screen bg-base-200 py-10 px-4">
-      <div className="max-w-5xl mx-auto">
-        {/* Title and Campaign Details */}
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-primaryColor">
-            {campaign.title}
-          </h1>
-          <p className="text-textColor">
-            <strong>Type:</strong> {campaign.type}
-          </p>
-          <p className="text-textColor">
-            <strong>Deadline:</strong>{" "}
-            {new Date(campaign.deadline).toLocaleDateString()}
-          </p>
-          <p className="text-textColor">
-            <strong>Minimum Donation:</strong> ${campaign.minDonation}
-          </p>
-          <p className="text-textColor mt-4">{campaign.description}</p>
-        </div>
-
-        {/* Campaign Image */}
-        <div className="text-center mb-8">
-          <img
-            src={campaign.image}
-            alt={campaign.title}
-            className="w-full h-64 object-cover rounded-lg"
-          />
-        </div>
-
-        {/* Donation Form */}
-        <div className="bg-base-100 p-6 rounded-lg shadow-lg">
-          <h2 className="text-xl font-semibold text-primaryColor mb-4">
-            Donate to This Campaign
-          </h2>
-          <div className="form-control mb-4">
-            <label className="label">
-              <span className="label-text">Enter Donation Amount</span>
-            </label>
-            <input
-              type="number"
-              placeholder="Enter amount"
-              className="input input-bordered w-full"
-              value={donationAmount}
-              onChange={(e) => setDonationAmount(e.target.value)}
+    <div className="min-h-screen py-12 px-4">
+      <div className="container px-4 mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 bg-white shadow-lg rounded-lg overflow-hidden">
+          <div className="h-64 md:h-auto">
+            <img
+              src={campaign.image}
+              alt={campaign.title}
+              className="w-full h-full object-cover"
             />
           </div>
-          <button className="btn btn-primary w-full" onClick={handleDonate}>
-            Donate
-          </button>
+
+          <div className="p-6 flex flex-col justify-between">
+            <div>
+              <h1 className="text-4xl font-bold text-primaryColor mb-4">
+                {campaign.title}
+              </h1>
+              <p className="text-gray-600 text-sm mb-2">
+                <strong>Type:</strong> {campaign.type}
+              </p>
+              <p className="text-gray-600 text-sm mb-2">
+                <strong>Deadline:</strong>{" "}
+                {new Date(campaign.deadline).toLocaleDateString()}
+              </p>
+              <p className="text-gray-600 text-sm mb-6">
+                <strong>Minimum Donation:</strong> ${campaign.minDonation}
+              </p>
+              <p className="text-gray-700 leading-relaxed mb-6">
+                {campaign.description}
+              </p>
+            </div>
+
+            <div className="bg-gray-50 p-6 rounded-md shadow-inner">
+              <h2 className="text-xl font-semibold text-primaryColor mb-4">
+                Support This Campaign
+              </h2>
+              <div className="form-control mb-4">
+                <label className="label">
+                  <span className="label-text">Donation Amount (USD)</span>
+                </label>
+                <input
+                  type="number"
+                  placeholder="Enter amount"
+                  className="input input-bordered w-full"
+                  value={donationAmount}
+                  onChange={(e) => setDonationAmount(e.target.value)}
+                />
+              </div>
+              <button className="btn btn-primary w-full" onClick={handleDonate}>
+                Donate Now
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
