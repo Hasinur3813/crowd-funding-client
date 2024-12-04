@@ -1,17 +1,37 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-// import Swal from "sweetalert2";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthProvider";
+import Swal from "sweetalert2";
 
 const Login = () => {
+  const { loading, login, signInWithGoogle } = useAuth();
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  const handleGoogleSignIn = () => {};
+  const handleGoogleSignIn = async () => {
+    try {
+      setError(null);
+      await signInWithGoogle();
+      navigate("/");
+    } catch (e) {
+      setError(e.code);
+    }
+  };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
+
+    try {
+      setError(null);
+      await login(email, password);
+      navigate("/");
+    } catch (e) {
+      Swal.fire("Error!", `${e.code}`, "error");
+      setError(e.code);
+    }
   };
 
   return (

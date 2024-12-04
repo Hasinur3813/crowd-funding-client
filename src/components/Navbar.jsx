@@ -1,7 +1,16 @@
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../contexts/AuthProvider";
 
 const Navbar = () => {
-  const currentUser = false;
+  const { currentUser, loading, logout } = useAuth();
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <div className="navbar shadow-md">
@@ -126,7 +135,7 @@ const Navbar = () => {
       </div>
 
       <div className="navbar-end">
-        {!currentUser ? (
+        {!currentUser && !loading ? (
           <div className="flex gap-2">
             <NavLink
               to="/signup"
@@ -150,21 +159,26 @@ const Navbar = () => {
               className="btn btn-ghost btn-circle avatar"
             >
               <div className="w-10 rounded-full">
-                <img
-                  alt="User Avatar"
-                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                />
+                <img alt="User Avatar" src={currentUser?.photoURL} />
               </div>
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-cardBg text-textPrimary rounded-box z-[1] mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content bg-cardBg text-textPrimary rounded-box z-10 mt-3 w-52 p-2 shadow bg-white"
             >
               <li>
-                <p className="text-primary">Hasinur Rahman</p>
+                <p className="text-primary text-base">
+                  {currentUser?.displayName}
+                </p>
               </li>
               <li>
-                <a className="hover:text-primary">Logout</a>
+                <button
+                  onClick={handleLogout}
+                  type="button"
+                  className="hover:text-primary text-base"
+                >
+                  Logout
+                </button>
               </li>
             </ul>
           </div>

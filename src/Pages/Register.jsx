@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useAuth } from "../contexts/AuthProvider";
 
 const Register = () => {
-  const { signup, loading, updateUser } = useAuth();
+  const { signup, loading, updateUser, setLoading, signInWithGoogle } =
+    useAuth();
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,9 +39,35 @@ const Register = () => {
 
     setError("");
 
-    const result = await signup(email, password);
-    // Swal.fire("Success!", "Registration successful.", "success");
+    const { user } = await signup(email, password);
+    await updateUser(name, photoURL, email);
+    const res = await fetch("http://localhost:4000/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        photoURL,
+      }),
+    });
+    const result = await res.json();
+    console.log(user);
     console.log(result);
+    setLoading(false);
+    Swal.fire("Success!", "Registration successful.", "success");
+    navigate("/");
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      setError("");
+      await signInWithGoogle();
+      navigate("/");
+    } catch (e) {
+      setError(e.code);
+    }
   };
 
   return (
@@ -122,13 +150,16 @@ const Register = () => {
             )}
             <div className="form-control mt-6">
               <button className="btn bg-primaryColor hover:bg-secondaryColor text-lg text-white w-full">
-                {loading ? "Registering an account" : "Register"}
+                {loading ? "Registering..." : "Register"}
               </button>
             </div>
           </form>
           <div className="divider !mt-0">OR</div>
           <div className="form-control mt-0 px-4 pb-6">
-            <button className="btn btn-outline text-primaryColor text-lg w-full">
+            <button
+              onClick={handleGoogleSignIn}
+              className="btn btn-outline text-primaryColor text-lg w-full"
+            >
               Sign in with Google
             </button>
           </div>

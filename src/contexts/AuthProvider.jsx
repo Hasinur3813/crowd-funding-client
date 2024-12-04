@@ -64,11 +64,12 @@ const AuthProvider = ({ children }) => {
     return sendPasswordResetEmail(auth, email);
   };
 
-  const updateUser = (name, url) => {
+  const updateUser = (name, url, email) => {
     setLoading(true);
     return updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: url,
+      email: email,
     });
   };
 
@@ -84,6 +85,7 @@ const AuthProvider = ({ children }) => {
     resetPassword,
     updateUser,
     loading,
+    setLoading,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
