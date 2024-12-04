@@ -31,10 +31,10 @@ const CampaignCard = ({ campaign }) => {
         <div className="flex justify-between items-start mb-4">
           <div className="text-sm text-secondaryColor font-medium">
             <p>
-              <span className="font-bold">Goal:</span> {campaign.goal}
+              <span className="font-bold">Goal:</span> ${campaign.goal}
             </p>
             <p>
-              <span className="font-bold">Raised:</span> {campaign.raised}
+              <span className="font-bold">Raised:</span> ${campaign.raised}
             </p>
           </div>
           <div className="text-sm text-secondaryColor font-medium text-right">
@@ -47,7 +47,7 @@ const CampaignCard = ({ campaign }) => {
           </div>
         </div>
 
-        <button className="btn bg-primaryColor hover:bg-secondaryColor text-white w-full mt-auto">
+        <button className="btn bg-primaryColor text-lg hover:bg-secondaryColor text-white w-full mt-auto">
           See More
         </button>
       </div>

@@ -1,4 +1,6 @@
 import Banner from "../components/Banner";
+import DonationAmounts from "../components/DonationAmount";
+import HowYouCanHelp from "../components/HowYouCanHelp";
 import RunningCampaignSection from "../components/RunningCampaignSection";
 
 const HomePage = () => {
@@ -6,6 +8,8 @@ const HomePage = () => {
     <div>
       <Banner />
       <RunningCampaignSection />
+      <DonationAmounts />
+      <HowYouCanHelp />
     </div>
   );
 };
