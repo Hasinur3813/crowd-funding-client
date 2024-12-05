@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const CampaignCard = ({ campaign }) => {
   const remainingDeadline = () => {
     const campaignDate = new Date(campaign.deadline).getTime();
@@ -47,9 +49,12 @@ const CampaignCard = ({ campaign }) => {
           </div>
         </div>
 
-        <button className="btn bg-primaryColor text-lg hover:bg-secondaryColor text-white w-full mt-auto">
+        <Link
+          to={`/campaign/${campaign._id}`}
+          className="btn bg-primaryColor text-lg hover:bg-secondaryColor text-white w-full mt-auto"
+        >
           See More
-        </button>
+        </Link>
       </div>
     </div>
   );

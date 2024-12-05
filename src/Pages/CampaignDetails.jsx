@@ -36,6 +36,15 @@ const CampaignDetails = () => {
       return;
     }
 
+    if (parseInt(donationAmount) < parseInt(campaign.minDonation)) {
+      Swal.fire(
+        "Check Donation Amount",
+        `Minimum donataion amount is $${campaign.minDonation}`,
+        "error"
+      );
+      return;
+    }
+
     const donationData = {
       mainCampaign: { ...campaign },
       donatedCampaign: {
@@ -96,7 +105,7 @@ const CampaignDetails = () => {
               </p>
               <p className="text-gray-600 text-sm mb-2">
                 <strong>Deadline:</strong>{" "}
-                {new Date(campaign.deadline).toLocaleDateString()}
+                {new Date(campaign.deadline).toLocaleDateString("en-GB")}
               </p>
               <p className="text-gray-600 text-sm mb-6">
                 <strong>Minimum Donation:</strong> ${campaign.minDonation}
