@@ -22,6 +22,18 @@ const AddCampaign = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const resetForm = () => {
+      setFormData({
+        image: "",
+        title: "",
+        type: "personal issue",
+        description: "",
+        minDonation: "",
+        deadline: "",
+        userEmail: currentUser?.email || "N/A",
+        userName: currentUser?.displayName || "Anonymous",
+      });
+    };
 
     try {
       const res = await fetch("http://localhost:4000/all-campaigns", {
@@ -35,6 +47,7 @@ const AddCampaign = () => {
       const result = await res.json();
       if (result.acknowledged) {
         Swal.fire("Success!", "Your campaign has been added!.", "success");
+        resetForm();
       } else {
         Swal.fire("Error!", "There was an error! Try again.", "error");
       }
@@ -103,10 +116,10 @@ const AddCampaign = () => {
               className="select select-bordered"
               required
             >
-              <option value="Personal issue">Personal Issue</option>
+              <option value="Personal Issue">Personal Issue</option>
               <option value="Startup">Startup</option>
               <option value="Business">Business</option>
-              <option value="creative ideas">Creative Ideas</option>
+              <option value="Creative Ideas">Creative Ideas</option>
             </select>
           </div>
 

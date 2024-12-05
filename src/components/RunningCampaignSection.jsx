@@ -14,7 +14,7 @@ const RunningCampaignSection = () => {
           Contribute to Campaigns That Are Still Making a Difference
         </h5>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {campaigns.map((campaign) => (
+          {campaigns?.map((campaign) => (
             <CampaignCard key={campaign._id} campaign={campaign} />
           ))}
         </div>
