@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import remainingDeadline from "../utils/remainingDeadline";
 
 const AllCampaigns = () => {
   const [campaigns, setCampaigns] = useState([]);
@@ -70,9 +71,7 @@ const AllCampaigns = () => {
                     <td>{campaign.type}</td>
                     <td>${campaign.minDonation}</td>
                     <td>${campaign.raised}</td>
-                    <td>
-                      {new Date(campaign.deadline).toLocaleDateString("en-GB")}
-                    </td>
+                    <td>{remainingDeadline(campaign.deadline)}</td>
                     <td>{campaign.userName || "Anonymous"}</td>
                     <td>
                       <Link

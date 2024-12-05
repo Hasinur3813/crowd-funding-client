@@ -131,7 +131,10 @@ const CampaignDetails = () => {
                   onChange={(e) => setDonationAmount(e.target.value)}
                 />
               </div>
-              <button className="btn btn-primary w-full" onClick={handleDonate}>
+              <button
+                className="btn bg-primaryColor text-white hover:bg-secondaryColor text-lg w-full"
+                onClick={handleDonate}
+              >
                 Donate Now
               </button>
             </div>

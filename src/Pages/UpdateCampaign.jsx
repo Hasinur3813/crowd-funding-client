@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthProvider";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const UpdateCampaign = () => {
   const { id } = useParams();
   const { currentUser } = useAuth();
-  const [campaign, setCampaigns] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     image: "",
     title: "",
@@ -17,13 +17,13 @@ const UpdateCampaign = () => {
     userEmail: currentUser?.email || "N/A",
     userName: currentUser?.displayName || "Anonymous",
   });
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCampaign = async () => {
       try {
         const res = await fetch(`http://localhost:4000/udpate-campaign/${id}`);
         const data = await res.json();
-        setCampaigns(data);
 
         setFormData({
           image: data.image || "",
@@ -55,17 +55,19 @@ const UpdateCampaign = () => {
     };
 
     try {
-      const res = await fetch(`http://localhost:4000/all-campaigns/${id}`, {
+      setLoading(true);
+      await fetch(`http://localhost:4000/all-campaigns/${id}`, {
         method: "PATCH",
         headers: {
           "content-type": "application/json",
         },
         body: JSON.stringify(updatedDoc),
       });
-      const result = await res.json();
-      console.log(result);
+      setLoading(false);
+      Swal.fire("Success!", "Your campaign has been updated!.", "success");
+      navigate("/my-campaigns");
     } catch (e) {
-      console.log(e);
+      Swal.fire("Error!", `${e.code}`, "error");
     }
   };
 
@@ -75,10 +77,10 @@ const UpdateCampaign = () => {
         {/* Title and Subtitle */}
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-primaryColor">
-            Add New Campaign
+            Update your campaign
           </h1>
           <p className="text-textColor">
-            Fill out the form below to create a new campaign and make a
+            Fill out the form below to update your campaign and make a
             difference!
           </p>
         </div>
@@ -214,8 +216,9 @@ const UpdateCampaign = () => {
             <button
               className="btn bg-primaryColor text-lg hover:bg-secondaryColor text-white"
               type="submit"
+              disabled={loading}
             >
-              Add Campaign
+              {loading ? "Updating..." : "Update Campaign"}
             </button>
           </div>
         </form>

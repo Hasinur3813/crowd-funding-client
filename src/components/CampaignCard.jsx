@@ -1,20 +1,8 @@
 import { Link } from "react-router-dom";
+import remainingDeadline from "../utils/remainingDeadline";
 
 const CampaignCard = ({ campaign }) => {
-  const remainingDeadline = () => {
-    const campaignDate = new Date(campaign.deadline).getTime();
-    const newDate = new Date().getTime();
-
-    const difference = campaignDate - newDate;
-    const remainingDays = parseInt(difference / (24 * 60 * 60 * 1000));
-
-    if (remainingDays < 0) {
-      return "Closed";
-    } else {
-      return `${remainingDays} days left`;
-    }
-  };
-
+  const deadline = remainingDeadline(campaign.deadline);
   return (
     <div className="card bg-base-100 dark:bg-darkMode shadow-xl ring-1 ring-primaryColor">
       <figure>
@@ -33,7 +21,7 @@ const CampaignCard = ({ campaign }) => {
         <div className="flex justify-between items-start mb-4">
           <div className="text-sm text-secondaryColor font-medium">
             <p>
-              <span className="font-bold">Goal:</span> ${campaign.goal}
+              <span className="font-bold">Type:</span> {campaign.type}
             </p>
             <p>
               <span className="font-bold">Raised:</span> ${campaign.raised}
@@ -41,10 +29,7 @@ const CampaignCard = ({ campaign }) => {
           </div>
           <div className="text-sm text-secondaryColor font-medium text-right">
             <p>
-              <span className="font-bold">Type:</span> {campaign.type}
-            </p>
-            <p>
-              <span className="font-bold">Deadline:</span> {remainingDeadline()}
+              <span className="font-bold">Deadline:</span> {deadline}
             </p>
           </div>
         </div>
