@@ -11,6 +11,7 @@ import AddCampaign from "./Pages/AddCampaign";
 import AllCampaigns from "./Pages/AllCampaigns";
 import CampaignDetails from "./Pages/CampaignDetails";
 import MyCampaign from "./Pages/MyCampaign";
+import UpdateCampaign from "./Pages/UpdateCampaign";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
       {
         path: "/my-campaigns",
         element: <MyCampaign />,
+      },
+      {
+        path: "/update-campaign/:id",
+        element: <UpdateCampaign />,
       },
     ],
   },

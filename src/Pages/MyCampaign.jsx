@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { useAuth } from "../contexts/AuthProvider";
 import Swal from "sweetalert2";
@@ -8,7 +8,6 @@ const MyCampaign = () => {
   const { currentUser } = useAuth();
   const [campaigns, setCampaigns] = useState([]);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (!currentUser) {
@@ -32,10 +31,6 @@ const MyCampaign = () => {
     };
     fetchCampaigns();
   }, [currentUser]);
-
-  const handleUpdate = (id) => {
-    navigate(`/updateCampaign/${id}`);
-  };
 
   const handleDelete = async (id) => {
     Swal.fire({
@@ -100,12 +95,12 @@ const MyCampaign = () => {
                     <td className="px-4 py-2">${campaign.raised}</td>
                     <td className="px-4 py-2">
                       <div className="flex gap-2">
-                        <button
-                          className="btn btn-sm bg-primaryColor text-white"
-                          onClick={() => handleUpdate(campaign._id)}
+                        <Link
+                          to={`/update-campaign/${campaign._id}`}
+                          className="btn btn-sm bg-primaryColor hover:bg-secondaryColor text-white"
                         >
                           Update
-                        </button>
+                        </Link>
                         <button
                           className="btn btn-sm btn-error !text-red-100"
                           onClick={() => handleDelete(campaign._id)}
