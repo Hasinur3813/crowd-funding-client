@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 import Swal from "sweetalert2";
 import { useAuth } from "../contexts/AuthProvider";
 
 const CampaignDetails = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
   const { currentUser } = useAuth();
   const [campaign, setCampaign] = useState(null);
   const [donationAmount, setDonationAmount] = useState("");
@@ -28,11 +27,6 @@ const CampaignDetails = () => {
   }, [id]);
 
   const handleDonate = async () => {
-    if (!currentUser) {
-      navigate("/login");
-      return;
-    }
-
     if (!donationAmount || isNaN(donationAmount) || donationAmount <= 0) {
       Swal.fire(
         "Invalid Amount",
@@ -43,11 +37,37 @@ const CampaignDetails = () => {
     }
 
     const donationData = {
-      campaignId: campaign._id,
-      userEmail: currentUser.email,
-      userName: currentUser.displayName,
-      amount: parseFloat(donationAmount),
+      mainCampaign: { ...campaign },
+      donatedCampaign: {
+        email: currentUser.email,
+        userName: currentUser.displayName,
+        campaignId: campaign._id,
+        raised: parseFloat(donationAmount),
+        title: campaign.title,
+        description: campaign.description,
+        type: campaign.type,
+        image: campaign.image,
+        deadline: campaign.deadline,
+      },
     };
+
+    try {
+      const res = await fetch("http://localhost:4000/donate", {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(donationData),
+      });
+      const result = await res.json();
+      if (result.acknowledged || result.insertedId) {
+        Swal.fire("Success", "Thank you for your contribution!", "success");
+      } else {
+        Swal.fire("Error!", "There was an error! Please try again", "error");
+      }
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   if (!campaign) {

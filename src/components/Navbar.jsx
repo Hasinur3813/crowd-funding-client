@@ -135,23 +135,11 @@ const Navbar = () => {
       </div>
 
       <div className="navbar-end">
-        {!currentUser && !loading ? (
-          <div className="flex gap-2">
-            <NavLink
-              to="/signup"
-              className="btn  text-white bg-primaryColor hover:bg-secondaryColor rounded-lg px-6 py-2 transition duration-300 hidden sm:block ease-in-out text-lg"
-            >
-              Register
-            </NavLink>
-
-            <NavLink
-              to="/login"
-              className="btn text-lg outline outline-1 outline-primaryColor text-secondaryColor rounded-lg px-6 py-2 transition duration-300 ease-in-out"
-            >
-              Login
-            </NavLink>
+        {loading ? (
+          <div className="flex items-center justify-center">
+            <div className="loading loading-spinner loading-lg text-primaryColor"></div>
           </div>
-        ) : (
+        ) : currentUser ? (
           <div className="dropdown dropdown-end">
             <div
               tabIndex={0}
@@ -181,6 +169,22 @@ const Navbar = () => {
                 </button>
               </li>
             </ul>
+          </div>
+        ) : (
+          <div className="flex gap-2">
+            <NavLink
+              to="/signup"
+              className="btn text-white bg-primaryColor hover:bg-secondaryColor rounded-lg px-6 py-2 transition duration-300 hidden sm:block ease-in-out text-lg"
+            >
+              Register
+            </NavLink>
+
+            <NavLink
+              to="/login"
+              className="btn text-lg outline outline-1 outline-primaryColor text-secondaryColor rounded-lg px-6 py-2 transition duration-300 ease-in-out"
+            >
+              Login
+            </NavLink>
           </div>
         )}
       </div>
