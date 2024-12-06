@@ -1,18 +1,19 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthProvider";
 import Swal from "sweetalert2";
 
 const Login = () => {
-  const { loading, login, signInWithGoogle } = useAuth();
+  const { login, signInWithGoogle } = useAuth();
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const { state } = useLocation();
 
   const handleGoogleSignIn = async () => {
     try {
       setError(null);
       await signInWithGoogle();
-      navigate("/");
+      state ? navigate(state) : navigate("/");
     } catch (e) {
       setError(e.code);
     }
@@ -27,7 +28,7 @@ const Login = () => {
     try {
       setError(null);
       await login(email, password);
-      navigate("/");
+      state ? navigate(state) : navigate("/");
     } catch (e) {
       Swal.fire("Error!", `${e.code}`, "error");
       setError(e.code);
@@ -42,8 +43,8 @@ const Login = () => {
             Welcome Back!
           </h1>
           <p className="py-6 text-textColor dark:text-white">
-            We're glad to see you again! Log in to access your account, manage
-            your campaigns, and continue making an impact with your
+            We&apos;re glad to see you again! Log in to access your account,
+            manage your campaigns, and continue making an impact with your
             contributions.
           </p>
         </div>
@@ -88,7 +89,7 @@ const Login = () => {
             </div>
             <div className="form-control mt-4">
               <p className="text-center text-sm text-textColor">
-                Don't have an account?{" "}
+                Don&apos;t have an account?{" "}
                 <Link
                   to="/signup"
                   className="text-primaryColor link link-hover"

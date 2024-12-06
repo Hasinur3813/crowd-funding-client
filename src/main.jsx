@@ -13,6 +13,7 @@ import CampaignDetails from "./Pages/CampaignDetails";
 import MyCampaign from "./Pages/MyCampaign";
 import UpdateCampaign from "./Pages/UpdateCampaign";
 import MyDonations from "./Pages/MyDonations";
+import PrivteRoute from "./components/PrivteRoute";
 
 const router = createBrowserRouter([
   {
@@ -34,7 +35,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/add-campaign",
-        element: <AddCampaign />,
+        element: (
+          <PrivteRoute>
+            <AddCampaign />
+          </PrivteRoute>
+        ),
       },
       {
         path: "/all-campaigns",
@@ -42,19 +47,35 @@ const router = createBrowserRouter([
       },
       {
         path: "/campaign/:id",
-        element: <CampaignDetails />,
+        element: (
+          <PrivteRoute>
+            <CampaignDetails />
+          </PrivteRoute>
+        ),
       },
       {
         path: "/my-campaigns",
-        element: <MyCampaign />,
+        element: (
+          <PrivteRoute>
+            <MyCampaign />
+          </PrivteRoute>
+        ),
       },
       {
         path: "/update-campaign/:id",
-        element: <UpdateCampaign />,
+        element: (
+          <PrivteRoute>
+            <UpdateCampaign />
+          </PrivteRoute>
+        ),
       },
       {
         path: "/my-donations",
-        element: <MyDonations />,
+        element: (
+          <PrivteRoute>
+            <MyDonations />
+          </PrivteRoute>
+        ),
       },
     ],
   },
