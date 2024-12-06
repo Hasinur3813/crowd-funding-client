@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const NavbarStart = () => {
   return (
@@ -70,9 +70,12 @@ const NavbarStart = () => {
           </li>
         </ul>
       </div>
-      <a href="/" className="font-bold text-secondaryColor text-xl sm:text-2xl">
+      <Link
+        to="/"
+        className="font-bold text-secondaryColor text-xl sm:text-2xl"
+      >
         CrowdCube
-      </a>
+      </Link>
     </div>
   );
 };

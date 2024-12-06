@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import remainingDeadline from "../utils/remainingDeadline";
+import Loader from "../components/Loader";
 
 const AllCampaigns = () => {
   const [campaigns, setCampaigns] = useState([]);
@@ -35,8 +36,8 @@ const AllCampaigns = () => {
         </div>
 
         {loading ? (
-          <div className="text-center text-primaryColor">
-            <p className="text-lg">Loading campaigns...</p>
+          <div className="w-full flex justify-center py-10">
+            <Loader />
           </div>
         ) : campaigns.length > 0 ? (
           <div className="overflow-x-auto">

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthProvider";
+import Loader from "../components/Loader";
 
 const MyDonations = () => {
   const { currentUser, loading } = useAuth();
@@ -11,7 +12,6 @@ const MyDonations = () => {
     if (loading) {
       return;
     }
-    console.log("rendered");
     const fetchDonations = async () => {
       try {
         const response = await fetch(
@@ -32,8 +32,8 @@ const MyDonations = () => {
 
   if (loading) {
     return (
-      <div className="text-center py-20 text-lg text-primaryColor">
-        Loading...
+      <div className=" w-full flex justify-center py-20">
+        <Loader />
       </div>
     );
   }

@@ -13,7 +13,7 @@ const Login = () => {
     try {
       setError(null);
       await signInWithGoogle();
-      state ? navigate(state) : navigate("/");
+      state?.path ? navigate(state.path) : navigate("/");
     } catch (e) {
       setError(e.code);
     }
@@ -28,7 +28,7 @@ const Login = () => {
     try {
       setError(null);
       await login(email, password);
-      state ? navigate(state) : navigate("/");
+      state?.path ? navigate(state.path) : navigate("/");
     } catch (e) {
       Swal.fire("Error!", `${e.code}`, "error");
       setError(e.code);

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { useAuth } from "../contexts/AuthProvider";
 import Swal from "sweetalert2";
+import Loader from "../components/Loader";
 
 const MyCampaign = () => {
   const { currentUser } = useAuth();
@@ -57,7 +58,11 @@ const MyCampaign = () => {
             icon: "success",
           });
         } catch (e) {
-          console.log(e);
+          Swal.fire({
+            title: "Error!",
+            text: `${e.code}`,
+            icon: "error",
+          });
         }
       }
     });
@@ -73,7 +78,9 @@ const MyCampaign = () => {
           View, update, or delete your campaigns here.
         </p>
         {loading ? (
-          <p>Loading campaigns...</p>
+          <div className="w-full flex justify-center">
+            <Loader />
+          </div>
         ) : campaigns.length === 0 ? (
           <p className="text-center text-gray-600">No campaigns found.</p>
         ) : (
