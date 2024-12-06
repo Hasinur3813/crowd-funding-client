@@ -91,7 +91,7 @@ const MyCampaign = () => {
                 <thead>
                   <tr className="bg-secondaryColor text-white">
                     <th className="px-4 py-2">Title</th>
-                    <th className="px-4 py-2">Type</th>
+                    <th className="px-4 py-2 hidden sm:table-cell">Type</th>
                     <th className="px-4 py-2">Raised</th>
                     <th className="px-4 py-2">Actions</th>
                   </tr>
@@ -100,7 +100,9 @@ const MyCampaign = () => {
                   {campaigns.map((campaign) => (
                     <tr key={campaign._id} className="border-t">
                       <td className="px-4 py-2">{campaign.title}</td>
-                      <td className="px-4 py-2">{campaign.type}</td>
+                      <td className="px-4 py-2 hidden sm:table-cell">
+                        {campaign.type}
+                      </td>
                       <td className="px-4 py-2">${campaign.raised}</td>
                       <td className="px-4 py-2">
                         <div className="flex gap-2">

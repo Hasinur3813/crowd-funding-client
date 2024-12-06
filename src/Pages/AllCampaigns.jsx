@@ -43,18 +43,18 @@ const AllCampaigns = () => {
         ) : campaigns.length > 0 ? (
           <Fade duration={1000} delay={200}>
             <div className="overflow-x-auto">
-              <table className="table table-zebra dark:bg-white w-full">
+              <table className="table table-zebra w-full dark:bg-white">
                 {/* Table Header */}
                 <thead>
                   <tr>
                     <th>#</th>
                     <th>Image</th>
                     <th>Title</th>
-                    <th>Type</th>
-                    <th>Minimum Donation</th>
-                    <th>Raised</th>
-                    <th>Deadline</th>
-                    <th>Added By</th>
+                    <th className="hidden sm:table-cell">Type</th>
+                    <th className="hidden sm:table-cell">Minimum Donation</th>
+                    <th className="hidden md:table-cell">Raised</th>
+                    <th className="hidden lg:table-cell">Deadline</th>
+                    <th className="hidden lg:table-cell">Added By</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -71,11 +71,19 @@ const AllCampaigns = () => {
                         />
                       </td>
                       <td>{campaign.title}</td>
-                      <td>{campaign.type}</td>
-                      <td>${campaign.minDonation}</td>
-                      <td>${campaign.raised}</td>
-                      <td>{remainingDeadline(campaign.deadline)}</td>
-                      <td>{campaign.userName || "Anonymous"}</td>
+                      <td className="hidden sm:table-cell">{campaign.type}</td>
+                      <td className="hidden sm:table-cell">
+                        ${campaign.minDonation}
+                      </td>
+                      <td className="hidden md:table-cell">
+                        ${campaign.raised}
+                      </td>
+                      <td className="hidden lg:table-cell">
+                        {remainingDeadline(campaign.deadline)}
+                      </td>
+                      <td className="hidden lg:table-cell">
+                        {campaign.userName || "Anonymous"}
+                      </td>
                       <td>
                         <Link
                           className="underline text-blue-500"

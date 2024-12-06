@@ -44,7 +44,11 @@ const AddCampaign = () => {
         headers: {
           "content-type": "application/json",
         },
-        body: JSON.stringify({ ...formData, raised: "0" }),
+        body: JSON.stringify({
+          ...formData,
+          raised: 0,
+          minDonation: parseInt(formData.minDonation),
+        }),
       });
 
       const result = await res.json();

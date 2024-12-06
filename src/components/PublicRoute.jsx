@@ -6,19 +6,18 @@ import Loader from "./Loader";
 const PublicRoute = ({ children }) => {
   const { currentUser, loading } = useAuth();
   const navigate = useNavigate();
-  const [shouldRender, setShouldRender] = useState(false);
+  const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
     if (!loading) {
+      setIsInitialized(true);
       if (currentUser) {
         navigate("/");
-      } else {
-        setShouldRender(true);
       }
     }
   }, [loading, currentUser, navigate]);
 
-  if (loading || !shouldRender) {
+  if (!isInitialized) {
     return (
       <div className="min-h-screen flex justify-center items-center">
         <Loader />

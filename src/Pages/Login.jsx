@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import { Fade } from "react-awesome-reveal";
 
 const Login = () => {
-  const { login, signInWithGoogle } = useAuth();
+  const { login, signInWithGoogle, setLoading } = useAuth();
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const { state } = useLocation();
@@ -33,6 +33,8 @@ const Login = () => {
     } catch (e) {
       Swal.fire("Error!", `${e.code}`, "error");
       setError(e.code);
+    } finally {
+      setLoading(false);
     }
   };
 
