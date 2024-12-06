@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Fade } from "react-awesome-reveal";
 
 import Swal from "sweetalert2";
 import { useAuth } from "../contexts/AuthProvider";
@@ -84,64 +85,66 @@ const CampaignDetails = () => {
   }
 
   return (
-    <div className="min-h-screen py-12 px-4">
-      <div className="container px-4 mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 bg-white dark:bg-darkMode shadow-lg rounded-lg overflow-hidden">
-          <div className="h-64 md:h-auto">
-            <img
-              src={campaign.image}
-              alt={campaign.title}
-              className="w-full h-full object-cover"
-            />
-          </div>
-
-          <div className="p-6 flex flex-col justify-between">
-            <div>
-              <h1 className="text-4xl font-bold text-primaryColor mb-4">
-                {campaign.title}
-              </h1>
-              <p className="text-gray-600 dark:text-white text-sm mb-2">
-                <strong>Type:</strong> {campaign.type}
-              </p>
-              <p className="text-gray-600 dark:text-white text-sm mb-2">
-                <strong>Deadline:</strong>{" "}
-                {new Date(campaign.deadline).toLocaleDateString("en-GB")}
-              </p>
-              <p className="text-gray-600 dark:text-white text-sm mb-6">
-                <strong>Minimum Donation:</strong> ${campaign.minDonation}
-              </p>
-              <p className="text-gray-700 dark:text-white leading-relaxed mb-6">
-                {campaign.description}
-              </p>
+    <Fade duration={1000} delay={200}>
+      <div className="min-h-screen py-12 px-4">
+        <div className="container px-4 mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 bg-white dark:bg-darkMode shadow-lg rounded-lg overflow-hidden">
+            <div className="h-64 md:h-auto">
+              <img
+                src={campaign.image}
+                alt={campaign.title}
+                className="w-full h-full object-cover"
+              />
             </div>
 
-            <div className="bg-gray-50 p-6 rounded-md shadow-inner">
-              <h2 className="text-xl font-semibold text-primaryColor mb-4">
-                Support This Campaign
-              </h2>
-              <div className="form-control mb-4">
-                <label className="label">
-                  <span className="label-text">Donation Amount (USD)</span>
-                </label>
-                <input
-                  type="number"
-                  placeholder="Enter amount"
-                  className="input input-bordered w-full"
-                  value={donationAmount}
-                  onChange={(e) => setDonationAmount(e.target.value)}
-                />
+            <div className="p-6 flex flex-col justify-between">
+              <div>
+                <h1 className="text-4xl font-bold text-primaryColor mb-4">
+                  {campaign.title}
+                </h1>
+                <p className="text-gray-600 dark:text-white text-sm mb-2">
+                  <strong>Type:</strong> {campaign.type}
+                </p>
+                <p className="text-gray-600 dark:text-white text-sm mb-2">
+                  <strong>Deadline:</strong>{" "}
+                  {new Date(campaign.deadline).toLocaleDateString("en-GB")}
+                </p>
+                <p className="text-gray-600 dark:text-white text-sm mb-6">
+                  <strong>Minimum Donation:</strong> ${campaign.minDonation}
+                </p>
+                <p className="text-gray-700 dark:text-white leading-relaxed mb-6">
+                  {campaign.description}
+                </p>
               </div>
-              <button
-                className="btn bg-primaryColor text-white hover:bg-secondaryColor text-lg w-full"
-                onClick={handleDonate}
-              >
-                Donate Now
-              </button>
+
+              <div className="bg-gray-50 p-6 rounded-md shadow-inner">
+                <h2 className="text-xl font-semibold text-primaryColor mb-4">
+                  Support This Campaign
+                </h2>
+                <div className="form-control mb-4">
+                  <label className="label">
+                    <span className="label-text">Donation Amount (USD)</span>
+                  </label>
+                  <input
+                    type="number"
+                    placeholder="Enter amount"
+                    className="input input-bordered w-full"
+                    value={donationAmount}
+                    onChange={(e) => setDonationAmount(e.target.value)}
+                  />
+                </div>
+                <button
+                  className="btn bg-primaryColor text-white hover:bg-secondaryColor text-lg w-full"
+                  onClick={handleDonate}
+                >
+                  Donate Now
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </Fade>
   );
 };
 

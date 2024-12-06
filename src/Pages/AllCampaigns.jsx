@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import remainingDeadline from "../utils/remainingDeadline";
 import Loader from "../components/Loader";
+import { Fade } from "react-awesome-reveal";
 
 const AllCampaigns = () => {
   const [campaigns, setCampaigns] = useState([]);
@@ -40,53 +41,55 @@ const AllCampaigns = () => {
             <Loader />
           </div>
         ) : campaigns.length > 0 ? (
-          <div className="overflow-x-auto">
-            <table className="table table-zebra dark:bg-white w-full">
-              {/* Table Header */}
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Image</th>
-                  <th>Title</th>
-                  <th>Type</th>
-                  <th>Minimum Donation</th>
-                  <th>Raised</th>
-                  <th>Deadline</th>
-                  <th>Added By</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              {/* Table Body */}
-              <tbody>
-                {campaigns.map((campaign, index) => (
-                  <tr key={campaign._id}>
-                    <td>{index + 1}</td>
-                    <td>
-                      <img
-                        src={campaign.image}
-                        alt={campaign.title}
-                        className="w-16 h-16 object-cover rounded-lg"
-                      />
-                    </td>
-                    <td>{campaign.title}</td>
-                    <td>{campaign.type}</td>
-                    <td>${campaign.minDonation}</td>
-                    <td>${campaign.raised}</td>
-                    <td>{remainingDeadline(campaign.deadline)}</td>
-                    <td>{campaign.userName || "Anonymous"}</td>
-                    <td>
-                      <Link
-                        className="underline text-blue-500"
-                        to={`/campaign/${campaign._id}`}
-                      >
-                        View Details
-                      </Link>
-                    </td>
+          <Fade duration={1000} delay={200}>
+            <div className="overflow-x-auto">
+              <table className="table table-zebra dark:bg-white w-full">
+                {/* Table Header */}
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Image</th>
+                    <th>Title</th>
+                    <th>Type</th>
+                    <th>Minimum Donation</th>
+                    <th>Raised</th>
+                    <th>Deadline</th>
+                    <th>Added By</th>
+                    <th>Action</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                {/* Table Body */}
+                <tbody>
+                  {campaigns.map((campaign, index) => (
+                    <tr key={campaign._id}>
+                      <td>{index + 1}</td>
+                      <td>
+                        <img
+                          src={campaign.image}
+                          alt={campaign.title}
+                          className="w-16 h-16 object-cover rounded-lg"
+                        />
+                      </td>
+                      <td>{campaign.title}</td>
+                      <td>{campaign.type}</td>
+                      <td>${campaign.minDonation}</td>
+                      <td>${campaign.raised}</td>
+                      <td>{remainingDeadline(campaign.deadline)}</td>
+                      <td>{campaign.userName || "Anonymous"}</td>
+                      <td>
+                        <Link
+                          className="underline text-blue-500"
+                          to={`/campaign/${campaign._id}`}
+                        >
+                          View Details
+                        </Link>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </Fade>
         ) : (
           <div className="text-center text-secondaryColor">
             <p className="text-lg">No campaigns found.</p>
