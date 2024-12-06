@@ -86,7 +86,7 @@ const CampaignDetails = () => {
   return (
     <div className="min-h-screen py-12 px-4">
       <div className="container px-4 mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 bg-white shadow-lg rounded-lg overflow-hidden">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 bg-white dark:bg-darkMode shadow-lg rounded-lg overflow-hidden">
           <div className="h-64 md:h-auto">
             <img
               src={campaign.image}
@@ -100,17 +100,17 @@ const CampaignDetails = () => {
               <h1 className="text-4xl font-bold text-primaryColor mb-4">
                 {campaign.title}
               </h1>
-              <p className="text-gray-600 text-sm mb-2">
+              <p className="text-gray-600 dark:text-white text-sm mb-2">
                 <strong>Type:</strong> {campaign.type}
               </p>
-              <p className="text-gray-600 text-sm mb-2">
+              <p className="text-gray-600 dark:text-white text-sm mb-2">
                 <strong>Deadline:</strong>{" "}
                 {new Date(campaign.deadline).toLocaleDateString("en-GB")}
               </p>
-              <p className="text-gray-600 text-sm mb-6">
+              <p className="text-gray-600 dark:text-white text-sm mb-6">
                 <strong>Minimum Donation:</strong> ${campaign.minDonation}
               </p>
-              <p className="text-gray-700 leading-relaxed mb-6">
+              <p className="text-gray-700 dark:text-white leading-relaxed mb-6">
                 {campaign.description}
               </p>
             </div>

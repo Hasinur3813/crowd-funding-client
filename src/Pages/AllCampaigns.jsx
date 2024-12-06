@@ -28,7 +28,7 @@ const AllCampaigns = () => {
           <h1 className="text-3xl font-bold text-primaryColor">
             All Campaigns
           </h1>
-          <p className="text-textColor">
+          <p className="text-textColor dark:text-white">
             Explore all the campaigns added by users. Get insights into ongoing
             efforts and contribute to make a difference!
           </p>
@@ -40,7 +40,7 @@ const AllCampaigns = () => {
           </div>
         ) : campaigns.length > 0 ? (
           <div className="overflow-x-auto">
-            <table className="table table-zebra w-full">
+            <table className="table table-zebra dark:bg-white w-full">
               {/* Table Header */}
               <thead>
                 <tr>

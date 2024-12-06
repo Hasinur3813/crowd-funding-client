@@ -1,19 +1,10 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, Navigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthProvider";
-import { useEffect } from "react";
 import Loader from "./Loader";
 
-const PrivteRoute = ({ children }) => {
+const PrivateRoute = ({ children }) => {
   const { currentUser, loading } = useAuth();
-  const navigate = useNavigate();
-  const { pathname } = useLocation();
-
-  console.log(currentUser);
-  useEffect(() => {
-    if (!loading && !currentUser) {
-      navigate("/login", { state: pathname });
-    }
-  }, [loading, currentUser, navigate, pathname]);
+  const location = useLocation();
 
   if (loading) {
     return (
@@ -22,8 +13,13 @@ const PrivteRoute = ({ children }) => {
       </div>
     );
   }
+  if (!currentUser) {
+    return (
+      <Navigate to="/login" state={{ state: location.pathname }} replace />
+    );
+  }
 
   return children;
 };
 
-export default PrivteRoute;
+export default PrivateRoute;
