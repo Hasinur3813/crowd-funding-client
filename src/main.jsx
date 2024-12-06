@@ -14,11 +14,14 @@ import MyCampaign from "./Pages/MyCampaign";
 import UpdateCampaign from "./Pages/UpdateCampaign";
 import MyDonations from "./Pages/MyDonations";
 import PrivteRoute from "./components/PrivteRoute";
+import PublicRoute from "./components/PublicRoute";
+import ErrorPage from "./Pages/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -27,11 +30,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/signup",
-        element: <Register />,
+        element: (
+          <PublicRoute>
+            <Register />
+          </PublicRoute>
+        ),
       },
       {
         path: "/login",
-        element: <Login />,
+        element: (
+          <PublicRoute>
+            <Login />
+          </PublicRoute>
+        ),
       },
       {
         path: "/add-campaign",

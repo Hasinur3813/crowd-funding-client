@@ -38,8 +38,7 @@ export default function Banner() {
               sustainable future.
             </p>
             <Link
-              to=""
-              href="#donate"
+              to="/all-campaigns"
               className="btn bg-primaryColor text-lg text-white px-6 py-2 rounded-full hover:bg-secondaryColor transition-colors duration-300"
             >
               Donate Now
@@ -60,8 +59,7 @@ export default function Banner() {
               brighter future.
             </p>
             <Link
-              to=""
-              href="#donate"
+              to="/all-campaigns"
               className="btn bg-primaryColor text-lg text-white px-6 py-2 rounded-full hover:bg-secondaryColor transition-colors duration-300"
             >
               Contribute Now
@@ -82,8 +80,7 @@ export default function Banner() {
               in need.
             </p>
             <Link
-              to=""
-              href="#donate"
+              to="/all-campaigns"
               className="btn bg-primaryColor text-lg text-white px-6 py-2 rounded-full hover:bg-secondaryColor transition-colors duration-300"
             >
               Support Health

@@ -8,6 +8,7 @@ const PrivteRoute = ({ children }) => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
+  console.log(currentUser);
   useEffect(() => {
     if (!loading && !currentUser) {
       navigate("/login", { state: pathname });

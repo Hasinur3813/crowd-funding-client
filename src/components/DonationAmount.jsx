@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const DonationAmounts = () => {
   const [totalDonated, setTotalDonated] = useState(0);
@@ -33,11 +34,8 @@ const DonationAmounts = () => {
           <p className="text-4xl font-bold text-primaryColor">
             ${totalDonated.toLocaleString()}
           </p>
-        </div>
 
-        {/* Extra Content */}
-        <div className="mt-12 bg-[#e5f5f8] p-8 rounded-lg shadow-lg">
-          <h3 className="text-2xl font-semibold text-primaryColor mb-4">
+          <h3 className="text-2xl mt-14 font-semibold text-primaryColor mb-4">
             How Your Contributions Are Making a Difference
           </h3>
           <p className="text-base text-textColor mb-6">
@@ -52,9 +50,12 @@ const DonationAmounts = () => {
 
           {/* Call to Action Buttons */}
           <div className="flex justify-center gap-6">
-            <button className="btn bg-primaryColor hover:bg-secondaryColor text-white">
+            <Link
+              to="/all-campaigns"
+              className="btn text-lg bg-primaryColor hover:bg-secondaryColor text-white"
+            >
               Donate Now
-            </button>
+            </Link>
           </div>
         </div>
       </div>

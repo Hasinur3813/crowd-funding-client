@@ -5,8 +5,10 @@ import {
   FaMoneyBillWave,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useAuth } from "../contexts/AuthProvider";
 
 const HowYouCanHelp = () => {
+  const { currentUser } = useAuth();
   return (
     <section className="py-12">
       <div className="container mx-auto text-center px-2">
@@ -56,22 +58,41 @@ const HowYouCanHelp = () => {
           </div>
 
           {/* Volunteer Your Time */}
-          <div className="card text-center p-6 border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition">
-            <FaHandsHelping className="text-4xl text-primaryColor mb-4 mx-auto" />
-            <h3 className="text-xl font-semibold mb-2 dark:text-white">
-              Volunteer Your Time
-            </h3>
-            <p className="text-sm text-gray-600 mb-4 dark:text-gray-400">
-              Join us in person or virtually to help with campaigns. Your time
-              and effort can directly impact the success of a cause.
-            </p>
-            <Link
-              to="/signup"
-              className="btn bg-primaryColor hover:bg-secondaryColor text-lg mt-auto text-white"
-            >
-              Become a Volunteer
-            </Link>
-          </div>
+          {currentUser ? (
+            <div className="card text-center p-6 border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition">
+              <FaHandsHelping className="text-4xl text-primaryColor mb-4 mx-auto" />
+              <h3 className="text-xl font-semibold mb-2 dark:text-white">
+                Thank You for Volunteering!
+              </h3>
+              <p className="text-sm text-gray-600 mb-4 dark:text-gray-400">
+                Your efforts are making a real difference. Manage your
+                commitments and continue to help campaigns succeed.
+              </p>
+              <Link
+                to="/my-campaigns"
+                className="btn bg-primaryColor hover:bg-secondaryColor text-lg mt-auto text-white"
+              >
+                Manage Your Camaign
+              </Link>
+            </div>
+          ) : (
+            <div className="card text-center p-6 border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition">
+              <FaHandsHelping className="text-4xl text-primaryColor mb-4 mx-auto" />
+              <h3 className="text-xl font-semibold mb-2 dark:text-white">
+                Volunteer Your Time
+              </h3>
+              <p className="text-sm text-gray-600 mb-4 dark:text-gray-400">
+                Join us in person or virtually to help with campaigns. Your time
+                and effort can directly impact the success of a cause.
+              </p>
+              <Link
+                to="/signup"
+                className="btn bg-primaryColor hover:bg-secondaryColor text-lg mt-auto text-white"
+              >
+                Become a Volunteer
+              </Link>
+            </div>
+          )}
 
           {/* Fundraise for a Cause */}
           <div className="card text-center p-6 border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition">

@@ -14,6 +14,7 @@ const AddCampaign = () => {
     userEmail: currentUser?.email || "N/A",
     userName: currentUser?.displayName || "Anonymous",
   });
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -36,6 +37,7 @@ const AddCampaign = () => {
     };
 
     try {
+      setLoading(true);
       const res = await fetch("http://localhost:4000/all-campaigns", {
         method: "POST",
         headers: {
@@ -48,10 +50,13 @@ const AddCampaign = () => {
       if (result.acknowledged) {
         Swal.fire("Success!", "Your campaign has been added!.", "success");
         resetForm();
+        setLoading(false);
       } else {
+        setLoading(false);
         Swal.fire("Error!", "There was an error! Try again.", "error");
       }
     } catch (e) {
+      setLoading(false);
       Swal.fire("Error!", `${e.code}`, "error");
     }
   };
@@ -199,8 +204,11 @@ const AddCampaign = () => {
           {/* Submit Button */}
           <div className="form-control mt-6">
             <button
-              className="btn bg-primaryColor text-lg hover:bg-secondaryColor text-white"
+              className={`${
+                loading && "opacity-50 !text-white !bg-primaryColor"
+              } btn bg-primaryColor text-lg hover:bg-secondaryColor text-white`}
               type="submit"
+              disabled={loading}
             >
               Add Campaign
             </button>

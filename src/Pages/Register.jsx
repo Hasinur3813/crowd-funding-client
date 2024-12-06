@@ -4,8 +4,7 @@ import Swal from "sweetalert2";
 import { useAuth } from "../contexts/AuthProvider";
 
 const Register = () => {
-  const { signup, loading, updateUser, setLoading, signInWithGoogle } =
-    useAuth();
+  const { signup, updateUser, setLoading, signInWithGoogle } = useAuth();
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -150,7 +149,7 @@ const Register = () => {
             )}
             <div className="form-control mt-6">
               <button className="btn bg-primaryColor hover:bg-secondaryColor text-lg text-white w-full">
-                {loading ? "Registering..." : "Register"}
+                Register
               </button>
             </div>
           </form>
