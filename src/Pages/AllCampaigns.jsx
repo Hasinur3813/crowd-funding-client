@@ -3,25 +3,40 @@ import { Link } from "react-router-dom";
 import remainingDeadline from "../utils/remainingDeadline";
 import Loader from "../components/Loader";
 import { Fade } from "react-awesome-reveal";
+import { FaSort } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 const AllCampaigns = () => {
   const [campaigns, setCampaigns] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchCampaigns = async () => {
       try {
+        setLoading(true);
         const response = await fetch("http://localhost:4000/all-campaigns");
         const data = await response.json();
         setCampaigns(data);
       } catch (error) {
-        console.error("Error fetching campaigns:", error);
+        Swal.fire("Error!", `${error.code}`, "error");
       } finally {
         setLoading(false);
       }
     };
     fetchCampaigns();
   }, []);
+
+  const handleSort = async () => {
+    try {
+      const res = await fetch("http://localhost:4000/sorted-campaings", {
+        method: "GET",
+      });
+      const campaigns = await res.json();
+      setCampaigns(campaigns);
+    } catch (e) {
+      Swal.fire("Error!", `${e.code}`, "error");
+    }
+  };
 
   return (
     <div className="min-h-screen  py-10 px-4">
@@ -34,6 +49,16 @@ const AllCampaigns = () => {
             Explore all the campaigns added by users. Get insights into ongoing
             efforts and contribute to make a difference!
           </p>
+        </div>
+
+        <div className="mb-5 flex justify-end">
+          <button
+            onClick={handleSort}
+            className="flex items-center gap-2 bg-gradient-to-r from-primaryColor to-secondaryColor text-white px-4 py-2 rounded-lg shadow-lg hover:scale-105 transition-transform duration-200"
+          >
+            <FaSort className="text-lg" />
+            <span className="text-base font-medium">Sort</span>
+          </button>
         </div>
 
         {loading ? (
