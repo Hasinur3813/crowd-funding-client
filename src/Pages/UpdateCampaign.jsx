@@ -23,7 +23,9 @@ const UpdateCampaign = () => {
   useEffect(() => {
     const fetchCampaign = async () => {
       try {
-        const res = await fetch(`http://localhost:4000/udpate-campaign/${id}`);
+        const res = await fetch(
+          `https://crowdcube-server-nu.vercel.app/udpate-campaign/${id}`
+        );
         const data = await res.json();
 
         setFormData({
@@ -57,13 +59,16 @@ const UpdateCampaign = () => {
 
     try {
       setLoading(true);
-      await fetch(`http://localhost:4000/all-campaigns/${id}`, {
-        method: "PATCH",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(updatedDoc),
-      });
+      await fetch(
+        `https://crowdcube-server-nu.vercel.app/all-campaigns/${id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(updatedDoc),
+        }
+      );
       setLoading(false);
       Swal.fire("Success!", "Your campaign has been updated!.", "success");
       navigate("/my-campaigns");

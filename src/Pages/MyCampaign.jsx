@@ -46,9 +46,12 @@ const MyCampaign = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const res = await fetch(`http://localhost:4000/my-campaign/${id}`, {
-            method: "DELETE",
-          });
+          const res = await fetch(
+            `https://crowdcube-server-nu.vercel.app/${id}`,
+            {
+              method: "DELETE",
+            }
+          );
           const result = await res.json();
           console.log(result);
           const remainingCampaign = campaigns.filter((c) => c._id !== id);

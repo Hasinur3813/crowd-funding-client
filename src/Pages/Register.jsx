@@ -41,7 +41,7 @@ const Register = () => {
 
     const { user } = await signup(email, password);
     await updateUser(name, photoURL, email);
-    const res = await fetch("http://localhost:4000/users", {
+    const res = await fetch("https://crowdcube-server-nu.vercel.app/users", {
       method: "POST",
       headers: {
         "content-type": "application/json",
