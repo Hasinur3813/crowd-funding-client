@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import Loader from "../components/Loader";
 import { Fade } from "react-awesome-reveal";
 import remainingDeadline from "../utils/remainingDeadline";
+import { Tooltip } from "react-tooltip";
 
 const MyCampaign = () => {
   const { currentUser } = useAuth();
@@ -118,17 +119,25 @@ const MyCampaign = () => {
                       <td className="px-4 py-2">
                         <div className="flex gap-2">
                           <Link
+                            data-tooltip-id="update"
+                            data-tooltip-content="Update your campaign"
+                            data-tooltip-place="left"
                             to={`/update-campaign/${campaign._id}`}
                             className="btn btn-sm bg-primaryColor hover:bg-secondaryColor text-white"
                           >
                             Update
                           </Link>
+                          <Tooltip id="update" />
                           <button
+                            data-tooltip-id="delete"
+                            data-tooltip-content="Delete your campaign"
+                            data-tooltip-place="top-start"
                             className="btn btn-sm btn-error !text-red-100"
                             onClick={() => handleDelete(campaign._id)}
                           >
                             Delete
                           </button>
+                          <Tooltip id="delete" />
                         </div>
                       </td>
                     </tr>

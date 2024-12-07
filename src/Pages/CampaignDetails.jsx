@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Fade } from "react-awesome-reveal";
 import Loader from "../components/Loader";
+import { Tooltip } from "react-tooltip";
 
 import Swal from "sweetalert2";
 import { useAuth } from "../contexts/AuthProvider";
@@ -144,6 +145,9 @@ const CampaignDetails = () => {
                     <span className="label-text">Donation Amount (USD)</span>
                   </label>
                   <input
+                    data-tooltip-id="donate"
+                    data-tooltip-content={`Minimum donation is $${campaign.minDonation}`}
+                    data-tooltip-place="top"
                     type="number"
                     placeholder="Enter amount"
                     className="input input-bordered w-full"
@@ -151,6 +155,7 @@ const CampaignDetails = () => {
                     onChange={(e) => setDonationAmount(e.target.value)}
                   />
                 </div>
+                <Tooltip id="donate" />
                 <button
                   className="btn bg-primaryColor text-white hover:bg-secondaryColor text-lg w-full"
                   onClick={handleDonate}

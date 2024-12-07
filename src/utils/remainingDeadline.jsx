@@ -3,17 +3,17 @@ const remainingDeadline = (deadline) => {
   const newDate = new Date().getTime();
 
   const difference = campaignDate - newDate;
-  const remainingDays = parseInt(difference / (24 * 60 * 60 * 1000));
-  console.log(remainingDays);
+  let remainingDays = Math.floor(difference / (24 * 60 * 60 * 1000));
+  remainingDays += 1;
 
   if (remainingDays < 0) {
     return "Over";
   } else if (remainingDays === 0) {
-    return "1 day left";
-  } else if (remainingDays < `${-0}`) {
     return "Less than a day left";
+  } else if (remainingDays === 1) {
+    return "1 day left";
   } else {
-    return `${remainingDays} days left`;
+    return `${remainingDays}  days left`;
   }
 };
 

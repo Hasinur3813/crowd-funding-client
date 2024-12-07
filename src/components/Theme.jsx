@@ -1,6 +1,14 @@
+import { Tooltip } from "react-tooltip";
+
 const Theme = ({ theme, handleThemeChange }) => {
   return (
-    <label className="swap swap-rotate mr-3">
+    <label
+      className="swap swap-rotate mr-3"
+      data-tooltip-id="theme"
+      data-tooltip-content={theme}
+      data-tooltip-place="top"
+    >
+      <Tooltip id="theme" className="z-10" />
       {/* this hidden checkbox controls the state */}
       <input
         type="checkbox"

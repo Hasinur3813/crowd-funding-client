@@ -1,9 +1,15 @@
 import { Link, NavLink } from "react-router-dom";
-
+import { Tooltip } from "react-tooltip";
 const NavbarStart = () => {
   return (
     <div className="navbar-start !w-11/12 sm:w-1/2">
-      <div className="dropdown">
+      <div
+        className="dropdown"
+        data-tooltip-id="menu"
+        data-tooltip-content="Menu"
+        data-tooltip-place="top"
+      >
+        <Tooltip id="menu" className="z-10" />
         <div
           tabIndex={0}
           role="button"
@@ -63,7 +69,7 @@ const NavbarStart = () => {
           <li>
             <NavLink
               to="/my-donations"
-              className="hover:text-primary font-semibold text-lg text-textColor"
+              className="hover:text-primary font-semibold text-base text-textColor"
             >
               My Donation
             </NavLink>

@@ -5,6 +5,7 @@ import Loader from "../components/Loader";
 import { Fade } from "react-awesome-reveal";
 import { FaSort } from "react-icons/fa";
 import Swal from "sweetalert2";
+import { Tooltip } from "react-tooltip";
 
 const AllCampaigns = () => {
   const [campaigns, setCampaigns] = useState([]);
@@ -57,7 +58,11 @@ const AllCampaigns = () => {
         </div>
 
         <div className="mb-5 flex justify-end">
+          <Tooltip id="sort" />
           <button
+            data-tooltip-id="sort"
+            data-tooltip-content="Sort by min. Donation"
+            data-tooltip-place="top-start"
             onClick={handleSort}
             className="flex items-center gap-2 bg-gradient-to-r from-primaryColor to-secondaryColor text-white px-4 py-2 rounded-lg shadow-lg hover:scale-105 transition-transform duration-200"
           >
@@ -116,11 +121,15 @@ const AllCampaigns = () => {
                       </td>
                       <td>
                         <Link
+                          data-tooltip-id="details"
+                          data-tooltip-content="Click to veiw details"
+                          data-tooltip-place="top-start"
                           className="underline text-blue-500"
                           to={`/campaign/${campaign._id}`}
                         >
                           View Details
                         </Link>
+                        <Tooltip id="details" />
                       </td>
                     </tr>
                   ))}

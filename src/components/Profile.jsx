@@ -1,6 +1,14 @@
+import { Tooltip } from "react-tooltip";
+
 const Profile = ({ currentUser, handleLogout }) => {
   return (
-    <div className="dropdown dropdown-end">
+    <div
+      className="dropdown dropdown-end"
+      data-tooltip-id="profile"
+      data-tooltip-content="Profile"
+      data-tooltip-place="top"
+    >
+      <Tooltip id="profile" className="z-10" />
       <div
         tabIndex={0}
         role="button"

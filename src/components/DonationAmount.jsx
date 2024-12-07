@@ -12,7 +12,7 @@ const DonationAmounts = () => {
         "https://crowdcube-server-nu.vercel.app/all-raised-amount"
       );
       const result = await res.json();
-      const amount = result.totalAmount;
+      const amount = result.totalDonated;
       setTotalDonated(amount);
     };
     getTotal();
