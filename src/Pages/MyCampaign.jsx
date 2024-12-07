@@ -5,6 +5,7 @@ import { useAuth } from "../contexts/AuthProvider";
 import Swal from "sweetalert2";
 import Loader from "../components/Loader";
 import { Fade } from "react-awesome-reveal";
+import remainingDeadline from "../utils/remainingDeadline";
 
 const MyCampaign = () => {
   const { currentUser } = useAuth();
@@ -12,13 +13,14 @@ const MyCampaign = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    console.log(currentUser.email);
     if (!currentUser) {
       return;
     }
     const fetchCampaigns = async () => {
       try {
         const response = await fetch(
-          `http://localhost:4000/my-campaign/${currentUser.email}`,
+          `https://crowdcube-server-nu.vercel.app/my-campaign/${currentUser.email}`,
           {
             method: "GET",
           }
@@ -95,7 +97,8 @@ const MyCampaign = () => {
                   <tr className="bg-secondaryColor text-white">
                     <th className="px-4 py-2">Title</th>
                     <th className="px-4 py-2 hidden sm:table-cell">Type</th>
-                    <th className="px-4 py-2">Raised</th>
+                    <th className="px-4 py-2 hidden sm:table-cell">Raised</th>
+                    <th className="px-4 py-2 hidden sm:table-cell">Deadline</th>
                     <th className="px-4 py-2">Actions</th>
                   </tr>
                 </thead>
@@ -106,7 +109,12 @@ const MyCampaign = () => {
                       <td className="px-4 py-2 hidden sm:table-cell">
                         {campaign.type}
                       </td>
-                      <td className="px-4 py-2">${campaign.raised}</td>
+                      <td className="px-4 py-2 hidden sm:table-cell">
+                        ${campaign.raised}
+                      </td>
+                      <td className="px-4 py-2 hidden sm:table-cell">
+                        {remainingDeadline(campaign.deadline)}
+                      </td>
                       <td className="px-4 py-2">
                         <div className="flex gap-2">
                           <Link
