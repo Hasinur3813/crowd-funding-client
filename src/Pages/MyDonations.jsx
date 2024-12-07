@@ -5,14 +5,12 @@ import Loader from "../components/Loader";
 import { AttentionSeeker } from "react-awesome-reveal";
 
 const MyDonations = () => {
-  const { currentUser, loading } = useAuth();
+  const { currentUser } = useAuth();
   const [donations, setDonations] = useState([]);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (loading) {
-      return;
-    }
     const fetchDonations = async () => {
       try {
         const response = await fetch(
@@ -23,17 +21,18 @@ const MyDonations = () => {
         );
         const campaigns = await response.json();
         setDonations(campaigns);
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching donations:", error);
       }
     };
 
     fetchDonations();
-  }, [currentUser, loading]);
+  }, [currentUser]);
 
   if (loading) {
     return (
-      <div className=" w-full flex justify-center py-20">
+      <div className=" w-full min-h-screen flex justify-center py-20">
         <Loader />
       </div>
     );

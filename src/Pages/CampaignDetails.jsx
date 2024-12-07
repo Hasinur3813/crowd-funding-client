@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Fade } from "react-awesome-reveal";
+import Loader from "../components/Loader";
 
 import Swal from "sweetalert2";
 import { useAuth } from "../contexts/AuthProvider";
+import remainingDeadline from "../utils/remainingDeadline";
 
 const CampaignDetails = () => {
   const { id } = useParams();
   const { currentUser } = useAuth();
   const [campaign, setCampaign] = useState(null);
   const [donationAmount, setDonationAmount] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchCampaign = async () => {
@@ -19,6 +22,7 @@ const CampaignDetails = () => {
         );
         const data = await response.json();
         setCampaign(data);
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching campaign details:", error);
       }
@@ -28,6 +32,16 @@ const CampaignDetails = () => {
   }, [id]);
 
   const handleDonate = async () => {
+    const isDeadlineOver = remainingDeadline(campaign.deadline);
+    if (isDeadlineOver === "Over") {
+      Swal.fire(
+        "Sorry!",
+        "The deadline for this campaign is Over. Try another campaign.",
+        "error"
+      );
+      return;
+    }
+
     if (!donationAmount || isNaN(donationAmount) || donationAmount <= 0) {
       Swal.fire(
         "Invalid Amount",
@@ -80,8 +94,12 @@ const CampaignDetails = () => {
     }
   };
 
-  if (!campaign) {
-    return <div>Loading...</div>;
+  if (loading) {
+    return (
+      <div className="min-h-screen flex justify-center items-center w-full">
+        <Loader />
+      </div>
+    );
   }
 
   return (

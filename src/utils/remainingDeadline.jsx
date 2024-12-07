@@ -6,7 +6,7 @@ const remainingDeadline = (deadline) => {
   const remainingDays = parseInt(difference / (24 * 60 * 60 * 1000));
 
   if (remainingDays === 0 || remainingDays < 0) {
-    return "Deadline Over";
+    return "Over";
   } else {
     return `${remainingDays} days left`;
   }
