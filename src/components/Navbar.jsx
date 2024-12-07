@@ -7,7 +7,7 @@ import NavbarCenter from "./NavbarCenter";
 import NavbarStart from "./NavbarStart";
 
 const Navbar = () => {
-  const { currentUser, loading, logout } = useAuth();
+  const { currentUser, logout } = useAuth();
   const [theme, setThem] = useState("light");
 
   const handleLogout = async () => {
@@ -40,11 +40,7 @@ const Navbar = () => {
       <div className="navbar-end">
         <Theme theme={theme} handleThemeChange={handleThemeChange} />
 
-        {loading ? (
-          <div className="flex items-center justify-center">
-            <div className="loading loading-spinner loading-lg text-primaryColor"></div>
-          </div>
-        ) : currentUser ? (
+        {currentUser ? (
           <Profile currentUser={currentUser} handleLogout={handleLogout} />
         ) : (
           <NavbarEnd />
