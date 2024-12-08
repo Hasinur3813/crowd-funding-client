@@ -47,14 +47,13 @@ const MyCampaign = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const res = await fetch(
-            `https://crowdcube-server-nu.vercel.app/${id}`,
+          await fetch(
+            `https://crowdcube-server-nu.vercel.app/my-campaign/${id}`,
             {
               method: "DELETE",
             }
           );
-          const result = await res.json();
-          console.log(result);
+
           const remainingCampaign = campaigns.filter((c) => c._id !== id);
           setCampaigns(remainingCampaign);
           Swal.fire({
