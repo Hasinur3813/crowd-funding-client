@@ -13,7 +13,7 @@ const NavbarStart = () => {
         <div
           tabIndex={0}
           role="button"
-          className="btn btn-ghost dark:text-white lg:hidden"
+          className="btn btn-ghost dark:text-white xl:hidden"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

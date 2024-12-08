@@ -15,6 +15,11 @@ const RunningCampaignSection = () => {
           <h5 className=" dark:text-white text-textColor mb-10 text-center">
             Contribute to Campaigns That Are Still Making a Difference
           </h5>
+
+          {/* need to implement here a message/paragraph 
+          
+          if no campaign are currently running */}
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {campaigns?.map((campaign) => (
               <CampaignCard key={campaign._id} campaign={campaign} />

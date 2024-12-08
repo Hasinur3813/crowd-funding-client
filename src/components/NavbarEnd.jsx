@@ -23,7 +23,7 @@ const NavbarEnd = () => {
           data-tooltip-content="Login your account"
           data-tooltip-place="left"
           to="/login"
-          className="btn text-lg outline outline-1 outline-primaryColor text-secondaryColor rounded-lg px-6 py-2 transition duration-300 ease-in-out"
+          className="btn  text-lg outline outline-1 outline-primaryColor text-secondaryColor rounded-lg px-6 py-2 transition duration-300 ease-in-out"
         >
           Login
         </NavLink>

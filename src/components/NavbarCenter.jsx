@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 const NavbarCenter = () => {
   return (
-    <div className="navbar-center hidden lg:flex">
+    <div className="navbar-center hidden xl:flex">
       <ul className="menu menu-horizontal px-1 space-x-6">
         <li>
           <NavLink
