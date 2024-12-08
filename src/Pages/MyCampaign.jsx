@@ -14,7 +14,6 @@ const MyCampaign = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    console.log(currentUser.email);
     if (!currentUser) {
       return;
     }
@@ -30,8 +29,6 @@ const MyCampaign = () => {
         setCampaigns(campaigns || []);
       } catch (error) {
         console.log(error);
-      } finally {
-        setLoading(false);
       }
     };
     fetchCampaigns();
