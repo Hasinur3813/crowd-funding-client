@@ -27,6 +27,7 @@ const MyCampaign = () => {
         );
         const campaigns = await response.json();
         setCampaigns(campaigns || []);
+        setLoading(false);
       } catch (error) {
         console.log(error);
       }
