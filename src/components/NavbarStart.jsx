@@ -1,6 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import { Tooltip } from "react-tooltip";
-const NavbarStart = () => {
+const NavbarStart = ({ isAuthenticated }) => {
   return (
     <div className="navbar-start !w-11/12 sm:w-1/2">
       <div
@@ -50,30 +50,34 @@ const NavbarStart = () => {
               All Campaign
             </NavLink>
           </li>
-          <li>
-            <NavLink
-              to="/add-campaign"
-              className="hover:text-primary font-semibold text-base text-textColor"
-            >
-              Add New Campaign
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/my-campaigns"
-              className="hover:text-primary font-semibold text-base text-textColor"
-            >
-              My Campaign
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/my-donations"
-              className="hover:text-primary font-semibold text-base text-textColor"
-            >
-              My Donation
-            </NavLink>
-          </li>
+          {isAuthenticated && (
+            <>
+              <li>
+                <NavLink
+                  to="/add-campaign"
+                  className="hover:text-primary font-semibold text-base text-textColor"
+                >
+                  Add New Campaign
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/my-campaigns"
+                  className="hover:text-primary font-semibold text-base text-textColor"
+                >
+                  My Campaign
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/my-donations"
+                  className="hover:text-primary font-semibold text-base text-textColor"
+                >
+                  My Donation
+                </NavLink>
+              </li>
+            </>
+          )}
         </ul>
       </div>
       <Link

@@ -1,19 +1,6 @@
 import { NavLink } from "react-router-dom";
-import { useAuth } from "../contexts/AuthProvider";
-import { useEffect, useState } from "react";
 
-const NavbarCenter = () => {
-  const { currentUser } = useAuth();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  useEffect(() => {
-    if (currentUser) {
-      setIsAuthenticated(true);
-    } else {
-      setIsAuthenticated(false);
-    }
-  }, [currentUser]);
-
+const NavbarCenter = ({ isAuthenticated }) => {
   return (
     <div className="navbar-center hidden xl:flex">
       <ul className="menu menu-horizontal px-1 space-x-6">

@@ -5,9 +5,10 @@ import { useAuth } from "../contexts/AuthProvider";
 import { Fade } from "react-awesome-reveal";
 
 const Register = () => {
-  const { signup, updateUser, setLoading, signInWithGoogle } = useAuth();
+  const { setCurrentUser, signup, updateUser, signInWithGoogle } = useAuth();
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,27 +38,37 @@ const Register = () => {
       return;
     }
 
-    setError("");
+    try {
+      setError("");
+      setLoading(true);
 
-    const { user } = await signup(email, password);
-    await updateUser(name, photoURL, email);
-    const res = await fetch("https://crowdcube-server-nu.vercel.app/users", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({
-        name,
-        email,
-        photoURL,
-      }),
-    });
-    const result = await res.json();
-    console.log(user);
-    console.log(result);
-    setLoading(false);
-    Swal.fire("Success!", "Registration successful.", "success");
-    navigate("/");
+      await signup(email, password);
+      await updateUser(name, photoURL, email);
+      setCurrentUser((user) => ({
+        ...user,
+        displayName: name,
+        photoURL: photoURL,
+        email: email,
+      }));
+      await fetch("https://crowdcube-server-nu.vercel.app/users", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          photoURL,
+        }),
+      });
+      setLoading(false);
+      Swal.fire("Success!", "Registration successful.", "success");
+      navigate("/");
+    } catch (e) {
+      setLoading(false);
+      setError(e.code);
+      Swal.fire("Error!", "Failed to register. Try again", "Error");
+    }
   };
 
   const handleGoogleSignIn = async () => {
@@ -114,7 +125,7 @@ const Register = () => {
                   <span className="label-text">Photo URL</span>
                 </label>
                 <input
-                  // type="url"
+                  type="url"
                   name="photoURL"
                   placeholder="Photo URL"
                   className="input input-bordered"
@@ -150,8 +161,11 @@ const Register = () => {
                 </p>
               )}
               <div className="form-control mt-6">
-                <button className="btn bg-primaryColor hover:bg-secondaryColor text-lg text-white w-full">
-                  Register
+                <button
+                  disabled={loading}
+                  className="btn bg-primaryColor hover:bg-secondaryColor text-lg text-white w-full"
+                >
+                  {loading ? "Registering..." : "Register"}
                 </button>
               </div>
             </form>

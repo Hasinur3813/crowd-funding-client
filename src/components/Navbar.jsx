@@ -9,6 +9,9 @@ import NavbarStart from "./NavbarStart";
 const Navbar = () => {
   const { currentUser, logout } = useAuth();
   const [theme, setThem] = useState("light");
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {}, [currentUser]);
 
   const handleLogout = async () => {
     try {
@@ -18,12 +21,17 @@ const Navbar = () => {
     }
   };
   useEffect(() => {
+    if (currentUser) {
+      setIsAuthenticated(true);
+    } else {
+      setIsAuthenticated(false);
+    }
     const storedTheme = localStorage.getItem("theme");
     if (storedTheme) {
       setThem(storedTheme);
       document.documentElement.classList = storedTheme;
     }
-  }, []);
+  }, [currentUser]);
 
   const handleThemeChange = () => {
     const newTheme = theme === "light" ? "dark" : "light";
@@ -34,8 +42,8 @@ const Navbar = () => {
 
   return (
     <div className="navbar shadow-md">
-      <NavbarStart />
-      <NavbarCenter />
+      <NavbarStart isAuthenticated={isAuthenticated} />
+      <NavbarCenter isAuthenticated={isAuthenticated} />
 
       <div className="navbar-end">
         <Theme theme={theme} handleThemeChange={handleThemeChange} />

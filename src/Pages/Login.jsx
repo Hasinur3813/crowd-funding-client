@@ -5,10 +5,11 @@ import Swal from "sweetalert2";
 import { Fade } from "react-awesome-reveal";
 
 const Login = () => {
-  const { login, signInWithGoogle, setLoading } = useAuth();
+  const { login, signInWithGoogle } = useAuth();
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const { state } = useLocation();
+  const [loading, setLoading] = useState(false);
 
   const handleGoogleSignIn = async () => {
     try {
@@ -28,9 +29,12 @@ const Login = () => {
 
     try {
       setError(null);
+      setLoading(true);
       await login(email, password);
+      setLoading(false);
       state?.path ? navigate(state.path) : navigate("/");
     } catch (e) {
+      setLoading(false);
       Swal.fire("Error!", `${e.code}`, "error");
       setError(e.code);
     } finally {
@@ -87,8 +91,11 @@ const Login = () => {
                 </p>
               )}
               <div className="form-control mt-6">
-                <button className="btn text-lg bg-primaryColor hover:bg-secondaryColor text-white w-full">
-                  Login
+                <button
+                  disabled={loading}
+                  className="btn text-lg bg-primaryColor hover:bg-secondaryColor text-white w-full"
+                >
+                  {loading ? "Loggin in..." : "Log In"}
                 </button>
               </div>
               <div className="form-control mt-4">

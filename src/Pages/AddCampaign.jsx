@@ -220,7 +220,7 @@ const AddCampaign = () => {
                 type="submit"
                 disabled={loading}
               >
-                Add Campaign
+                {loading ? "Adding your campaign..." : "Add Campaign"}
               </button>
             </div>
           </form>

@@ -3,6 +3,12 @@ import { useParams } from "react-router-dom";
 import { Fade } from "react-awesome-reveal";
 import Loader from "../components/Loader";
 import { Tooltip } from "react-tooltip";
+import {
+  FaDollarSign,
+  FaCalendarAlt,
+  FaRegHandshake,
+  FaDonate,
+} from "react-icons/fa";
 
 import Swal from "sweetalert2";
 import { useAuth } from "../contexts/AuthProvider";
@@ -14,6 +20,7 @@ const CampaignDetails = () => {
   const [campaign, setCampaign] = useState(null);
   const [donationAmount, setDonationAmount] = useState("");
   const [loading, setLoading] = useState(true);
+  const [donationLoading, setDonationLoading] = useState(false);
 
   useEffect(() => {
     const fetchCampaign = async () => {
@@ -77,6 +84,7 @@ const CampaignDetails = () => {
     };
 
     try {
+      setDonationLoading(true);
       const res = await fetch("https://crowdcube-server-nu.vercel.app/donate", {
         method: "PUT",
         headers: {
@@ -87,11 +95,13 @@ const CampaignDetails = () => {
       const result = await res.json();
       if (result.acknowledged || result.insertedId) {
         Swal.fire("Success", "Thank you for your contribution!", "success");
+        setDonationLoading(false);
       } else {
+        setDonationLoading(false);
         Swal.fire("Error!", "There was an error! Please try again", "error");
       }
-    } catch (e) {
-      console.log(e);
+    } catch {
+      Swal.fire("Error!", "There was an error! Please try again", "error");
     }
   };
 
@@ -105,38 +115,73 @@ const CampaignDetails = () => {
 
   return (
     <Fade duration={1000} delay={200}>
-      <div className="min-h-screen py-12 px-4">
+      <div className="min-h-screen py-12">
         <div className="container px-4 mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 bg-white dark:bg-darkMode shadow-lg rounded-lg overflow-hidden">
-            <div className="h-64 md:h-auto">
+            <div className="h-64 md:h-[400px]">
               <img
                 src={campaign.image}
                 alt={campaign.title}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover rounded-lg"
               />
             </div>
 
             <div className="p-6 flex flex-col justify-between">
-              <div>
-                <h1 className="text-4xl font-bold text-primaryColor mb-4">
-                  {campaign.title}
-                </h1>
-                <p className="text-gray-600 dark:text-white text-sm mb-2">
-                  <strong>Type:</strong> {campaign.type}
-                </p>
-                <p className="text-gray-600 dark:text-white text-sm mb-2">
-                  <strong>Deadline:</strong>{" "}
-                  {new Date(campaign.deadline).toLocaleDateString("en-GB")}
-                </p>
-                <p className="text-gray-600 dark:text-white text-sm mb-6">
-                  <strong>Minimum Donation:</strong> ${campaign.minDonation}
-                </p>
-                <p className="text-gray-700 dark:text-white leading-relaxed mb-6">
-                  {campaign.description}
-                </p>
-              </div>
+              <h1 className="text-xl md:text-3xl lg:text-4xl font-extrabold text-primaryColor mb-4 leading-snug">
+                {campaign.title}
+              </h1>
+              {/* Campaign Details */}
 
-              <div className="bg-gray-50 p-6 rounded-md shadow-inner">
+              <div className="grid grid-cols-2 gap-4 text-sm">
+                {/* Campaign Type */}
+                <div className="flex items-center space-x-2">
+                  <FaRegHandshake className="text-primaryColor text-lg" />
+                  <span className="font-semibold text-gray-700 dark:text-gray-300">
+                    Type:
+                  </span>
+                  <span className="text-gray-600 dark:text-white">
+                    {campaign.type}
+                  </span>
+                </div>
+
+                {/* Deadline */}
+                <div className="flex items-center space-x-2">
+                  <FaCalendarAlt className="text-primaryColor text-lg" />
+                  <span className="font-semibold text-gray-700 dark:text-gray-300">
+                    Deadline:
+                  </span>
+                  <span className="text-gray-600 dark:text-white">
+                    {new Date(campaign.deadline).toLocaleDateString("en-GB")}
+                  </span>
+                </div>
+
+                {/* Minimum Donation */}
+                <div className="flex items-center space-x-2">
+                  <FaDollarSign className="text-primaryColor text-lg" />
+                  <span className="font-semibold text-gray-700 dark:text-gray-300">
+                    Min Donation:
+                  </span>
+                  <span className="text-gray-600 dark:text-white">
+                    ${campaign.minDonation}
+                  </span>
+                </div>
+
+                {/* Raised Amount */}
+                <div className="flex items-center space-x-2">
+                  <FaDonate className="text-primaryColor text-lg" />
+                  <span className="font-semibold text-primaryColor dark:text-gray-300">
+                    Raised:
+                  </span>
+                  <span className="text-secondaryColor font-bold dark:text-white">
+                    ${campaign.raised}
+                  </span>
+                </div>
+              </div>
+              {/* Campaign Description */}
+              <p className="text-gray-700 mt-5 dark:text-gray-300 leading-relaxed">
+                {campaign.description}
+              </p>
+              <div className="bg-gray-50 p-6 rounded-md shadow-inner mt-10">
                 <h2 className="text-xl font-semibold text-primaryColor mb-4">
                   Support This Campaign
                 </h2>
@@ -159,8 +204,9 @@ const CampaignDetails = () => {
                 <button
                   className="btn bg-primaryColor text-white hover:bg-secondaryColor text-lg w-full"
                   onClick={handleDonate}
+                  disabled={donationLoading}
                 >
-                  Donate Now
+                  {donationLoading ? "Please wait..." : "Donate Now"}
                 </button>
               </div>
             </div>

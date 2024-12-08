@@ -76,6 +76,7 @@ const UpdateCampaign = () => {
       Swal.fire("Success!", "Your campaign has been updated!.", "success");
       navigate("/my-campaigns");
     } catch (e) {
+      setLoading(false);
       Swal.fire("Error!", `${e.code}`, "error");
     }
   };
