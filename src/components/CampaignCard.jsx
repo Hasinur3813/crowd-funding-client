@@ -15,9 +15,15 @@ const CampaignCard = ({ campaign }) => {
           />
         </figure>
         <div className="card-body !px-4 flex flex-col justify-between">
-          <h2 className="card-title text-primaryColor">{campaign.title}</h2>
+          <h2 className="card-title text-primaryColor">
+            {campaign.title.length > 35
+              ? `${campaign.title.slice(0, 35)}...`
+              : campaign.title}
+          </h2>
           <p className="text-textColor mb-4 line-clamp-3 dark:text-white">
-            {campaign.description}
+            {campaign.description.length > 55
+              ? `${campaign.description.slice(0, 55)}...`
+              : campaign.description}
           </p>
 
           <div className="flex justify-between items-start mb-4">

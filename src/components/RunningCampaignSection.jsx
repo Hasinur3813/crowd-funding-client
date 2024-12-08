@@ -16,15 +16,17 @@ const RunningCampaignSection = () => {
             Contribute to Campaigns That Are Still Making a Difference
           </h5>
 
-          {/* need to implement here a message/paragraph 
-          
-          if no campaign are currently running */}
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {campaigns?.map((campaign) => (
-              <CampaignCard key={campaign._id} campaign={campaign} />
-            ))}
-          </div>
+          {campaigns?.length === 0 || !campaigns ? (
+            <h3 className="text-2xl text-center py-10">
+              Sorry! Currently no campaign is running.
+            </h3>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {campaigns?.map((campaign) => (
+                <CampaignCard key={campaign._id} campaign={campaign} />
+              ))}
+            </div>
+          )}
         </div>
       </section>
     </Fade>
