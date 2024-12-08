@@ -57,6 +57,7 @@ const UpdateCampaign = () => {
 
     const updatedDoc = {
       ...formData,
+      deadline: new Date(formData.deadline).toISOString(),
     };
 
     try {

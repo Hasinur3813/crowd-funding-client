@@ -50,7 +50,7 @@ const AddCampaign = () => {
             ...formData,
             raised: 0,
             minDonation: parseInt(formData.minDonation),
-            deadline: new Date(formData.deadline),
+            deadline: new Date(formData.deadline).toISOString(),
           }),
         }
       );
