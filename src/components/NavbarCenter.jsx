@@ -1,6 +1,19 @@
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../contexts/AuthProvider";
+import { useEffect, useState } from "react";
 
 const NavbarCenter = () => {
+  const { currentUser } = useAuth();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    if (currentUser) {
+      setIsAuthenticated(true);
+    } else {
+      setIsAuthenticated(false);
+    }
+  }, [currentUser]);
+
   return (
     <div className="navbar-center hidden xl:flex">
       <ul className="menu menu-horizontal px-1 space-x-6">
@@ -20,30 +33,35 @@ const NavbarCenter = () => {
             All Campaign
           </NavLink>
         </li>
-        <li>
-          <NavLink
-            to="/add-campaign"
-            className="hover:text-primary font-semibold text-base text-textColor dark:text-white"
-          >
-            Add New Campaign
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/my-campaigns"
-            className="hover:text-primary font-semibold text-base text-textColor dark:text-white"
-          >
-            My Campaign
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/my-donations"
-            className="hover:text-primary font-semibold text-base text-textColor dark:text-white"
-          >
-            My Donation
-          </NavLink>
-        </li>
+        {isAuthenticated && (
+          <>
+            <li>
+              <NavLink
+                to="/add-campaign"
+                className="hover:text-primary font-semibold text-base text-textColor dark:text-white"
+              >
+                Add New Campaign
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink
+                to="/my-campaigns"
+                className="hover:text-primary font-semibold text-base text-textColor dark:text-white"
+              >
+                My Campaign
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/my-donations"
+                className="hover:text-primary font-semibold text-base text-textColor dark:text-white"
+              >
+                My Donation
+              </NavLink>
+            </li>
+          </>
+        )}
       </ul>
     </div>
   );

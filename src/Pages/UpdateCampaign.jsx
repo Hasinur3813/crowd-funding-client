@@ -34,7 +34,9 @@ const UpdateCampaign = () => {
           type: data.type || "Personal Issues",
           description: data.description || "",
           minDonation: data.minDonation || "",
-          deadline: data.deadline || "",
+          deadline: data.deadline
+            ? new Date(data.deadline).toISOString().split("T")[0]
+            : "",
           userEmail: currentUser?.email || "N/A",
           userName: currentUser?.displayName || "Anonymous",
         });

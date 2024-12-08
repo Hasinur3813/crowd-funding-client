@@ -80,7 +80,7 @@ const NavbarStart = () => {
         to="/"
         className="font-bold text-secondaryColor text-xl sm:text-2xl"
       >
-        CrowdCube
+        CROWDCUBE
       </Link>
     </div>
   );
