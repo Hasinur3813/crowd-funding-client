@@ -26,7 +26,7 @@ const CampaignDetails = () => {
     const fetchCampaign = async () => {
       try {
         const response = await fetch(
-          `https://crowdcube-server-nu.vercel.app/all-campaigns/${id}`
+          `http://localhost:4000/all-campaigns/${id}`
         );
         const data = await response.json();
         setCampaign(data);
@@ -85,7 +85,7 @@ const CampaignDetails = () => {
 
     try {
       setDonationLoading(true);
-      const res = await fetch("https://crowdcube-server-nu.vercel.app/donate", {
+      const res = await fetch("http://localhost:4000/donate", {
         method: "PUT",
         headers: {
           "content-type": "application/json",

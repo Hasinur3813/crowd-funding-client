@@ -15,9 +15,7 @@ const AllCampaigns = () => {
     const fetchCampaigns = async () => {
       try {
         setLoading(true);
-        const response = await fetch(
-          "https://crowdcube-server-nu.vercel.app/all-campaigns"
-        );
+        const response = await fetch("http://localhost:4000/all-campaigns");
         const data = await response.json();
         setCampaigns(data);
       } catch (error) {
@@ -31,12 +29,9 @@ const AllCampaigns = () => {
 
   const handleSort = async () => {
     try {
-      const res = await fetch(
-        "https://crowdcube-server-nu.vercel.app/sorted-campaings",
-        {
-          method: "GET",
-        }
-      );
+      const res = await fetch("http://localhost:4000/sorted-campaings", {
+        method: "GET",
+      });
       const campaigns = await res.json();
       setCampaigns(campaigns);
     } catch (e) {

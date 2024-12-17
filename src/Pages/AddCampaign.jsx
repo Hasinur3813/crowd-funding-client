@@ -39,21 +39,18 @@ const AddCampaign = () => {
 
     try {
       setLoading(true);
-      const res = await fetch(
-        "https://crowdcube-server-nu.vercel.app/all-campaigns",
-        {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify({
-            ...formData,
-            raised: 0,
-            minDonation: parseInt(formData.minDonation),
-            deadline: new Date(formData.deadline).toISOString(),
-          }),
-        }
-      );
+      const res = await fetch("http://localhost:4000/all-campaigns", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          ...formData,
+          raised: 0,
+          minDonation: parseInt(formData.minDonation),
+          deadline: new Date(formData.deadline).toISOString(),
+        }),
+      });
 
       const result = await res.json();
       if (result.acknowledged) {
