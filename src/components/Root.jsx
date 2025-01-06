@@ -8,7 +8,9 @@ const Root = () => {
     <div className="bg-background dark:bg-darkMode">
       <ScrollToTop />
       <Navbar />
-      <Outlet />
+      <div className="pt-16">
+        <Outlet />
+      </div>
       <Footer />
     </div>
   );

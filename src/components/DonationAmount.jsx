@@ -8,9 +8,7 @@ const DonationAmounts = () => {
 
   useEffect(() => {
     const getTotal = async () => {
-      const res = await fetch(
-        "https://crowdcube-server-nu.vercel.app/all-raised-amount"
-      );
+      const res = await fetch("http://localhost:4000/all-raised-amount");
       const result = await res.json();
       const amount = result.totalDonated;
       setTotalDonated(amount);

@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useAuth } from "../contexts/AuthProvider";
 import { Fade } from "react-awesome-reveal";
+import axios from "axios";
 
 const Register = () => {
   const { setCurrentUser, signup, updateUser, signInWithGoogle } = useAuth();
@@ -50,16 +51,11 @@ const Register = () => {
         photoURL: photoURL,
         email: email,
       }));
-      await fetch("https://crowdcube-server-nu.vercel.app/users", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          photoURL,
-        }),
+      axios.post("http://localhost:4000/users", {
+        name,
+        email,
+        photoURL,
+        password,
       });
       setLoading(false);
       Swal.fire("Success!", "Registration successful.", "success");

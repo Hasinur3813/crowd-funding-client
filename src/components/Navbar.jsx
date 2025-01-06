@@ -11,8 +11,6 @@ const Navbar = () => {
   const [theme, setThem] = useState("light");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  useEffect(() => {}, [currentUser]);
-
   const handleLogout = async () => {
     try {
       await logout();
@@ -41,7 +39,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar shadow-md">
+    <div className="navbar shadow-md fixed top-0 w-full z-20 bg-white dark:bg-darkMode">
       <NavbarStart isAuthenticated={isAuthenticated} />
       <NavbarCenter isAuthenticated={isAuthenticated} />
 

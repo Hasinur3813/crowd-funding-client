@@ -11,6 +11,7 @@ import {
   updateProfile,
   signOut,
 } from "firebase/auth";
+import axios from "axios";
 
 const AuthContext = createContext();
 
@@ -24,12 +25,49 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user);
-      setLoading(false);
+      if (user) {
+        const { displayName, email } = user;
+        axios
+          .post(
+            "http://localhost:4000/jwt",
+            { displayName, email },
+            { withCredentials: true }
+          )
+          .then((res) => {
+            console.log(res.data);
+            setCurrentUser(user);
+            setLoading(false);
+          })
+          .catch((err) => {
+            console.error("Error creating JWT:", err);
+            setLoading(false);
+          });
+      } else {
+        axios
+          .post(
+            "http://localhost:4000/clear-cookie",
+            {},
+            { withCredentials: true }
+          )
+          .then(() => {
+            setCurrentUser(null);
+            setLoading(false);
+          });
+      }
     });
 
-    return () => unsubscribe();
+    return () => unsubscribe(); // Cleanup the listener
   }, []);
+
+  // useEffect(() => {
+  //   const unsubscribe = onAuthStateChanged(auth, (user) => {
+  //     setCurrentUser(user);
+  //     console.log(user?.email);
+  //     setLoading(false);
+  //   });
+
+  //   return () => unsubscribe();
+  // }, []);
 
   // sign in with google
 

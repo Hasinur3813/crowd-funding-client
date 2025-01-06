@@ -12,6 +12,7 @@
   "dependencies": {
     "@emotion/react": "^11.13.5",
     "autoprefixer": "^10.4.20",
+    "axios": "^1.7.9",
     "daisyui": "^4.12.14",
     "firebase": "^11.0.2",
     "postcss": "^8.4.49",
@@ -35,6 +36,6 @@
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.14",
     "globals": "^15.12.0",
-    "vite": "^6.0.1"
+    "vite": "^6.0.7"
   }
 }
