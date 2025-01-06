@@ -13,6 +13,7 @@ import {
 import Swal from "sweetalert2";
 import { useAuth } from "../contexts/AuthProvider";
 import remainingDeadline from "../utils/remainingDeadline";
+import axios from "axios";
 
 const CampaignDetails = () => {
   const { id } = useParams();
@@ -25,14 +26,17 @@ const CampaignDetails = () => {
   useEffect(() => {
     const fetchCampaign = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:4000/all-campaigns/${id}`
+        const response = await axios.get(
+          `http://localhost:4000/all-campaigns/${id}`,
+          { withCredentials: true }
         );
-        const data = await response.json();
-        setCampaign(data);
+        const data = response.data;
         setLoading(false);
+
+        setCampaign(data);
       } catch (error) {
-        console.error("Error fetching campaign details:", error);
+        console.error("Error fetching campaign details:", error.code);
+        setLoading(false);
       }
     };
 
@@ -112,6 +116,15 @@ const CampaignDetails = () => {
       </div>
     );
   }
+  if (!loading && !campaign) {
+    return (
+      <div className="min-h-screen flex justify-center items-center w-full">
+        <h2 className="text-red-500 text-2xl">
+          No data found! Try logging again
+        </h2>
+      </div>
+    );
+  }
 
   return (
     <Fade duration={1000} delay={200}>
@@ -120,15 +133,15 @@ const CampaignDetails = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 bg-white dark:bg-darkMode shadow-lg rounded-lg overflow-hidden">
             <div className="h-64 md:h-[400px]">
               <img
-                src={campaign.image}
-                alt={campaign.title}
+                src={campaign?.image}
+                alt={campaign?.title}
                 className="w-full h-full object-cover rounded-lg"
               />
             </div>
 
             <div className="p-6 flex flex-col justify-between">
               <h1 className="text-xl md:text-3xl lg:text-4xl font-extrabold text-primaryColor mb-4 leading-snug">
-                {campaign.title}
+                {campaign?.title}
               </h1>
               {/* Campaign Details */}
 
@@ -140,7 +153,7 @@ const CampaignDetails = () => {
                     Type:
                   </span>
                   <span className="text-gray-600 dark:text-white">
-                    {campaign.type}
+                    {campaign?.type}
                   </span>
                 </div>
 
@@ -151,7 +164,7 @@ const CampaignDetails = () => {
                     Deadline:
                   </span>
                   <span className="text-gray-600 dark:text-white">
-                    {new Date(campaign.deadline).toLocaleDateString("en-GB")}
+                    {new Date(campaign?.deadline).toLocaleDateString("en-GB")}
                   </span>
                 </div>
 
@@ -162,7 +175,7 @@ const CampaignDetails = () => {
                     Min Donation:
                   </span>
                   <span className="text-gray-600 dark:text-white">
-                    ${campaign.minDonation}
+                    ${campaign?.minDonation}
                   </span>
                 </div>
 
@@ -173,13 +186,13 @@ const CampaignDetails = () => {
                     Raised:
                   </span>
                   <span className="text-secondaryColor font-bold dark:text-white">
-                    ${campaign.raised}
+                    ${campaign?.raised}
                   </span>
                 </div>
               </div>
               {/* Campaign Description */}
               <p className="text-gray-700 mt-5 dark:text-gray-300 leading-relaxed">
-                {campaign.description}
+                {campaign?.description}
               </p>
               <div className="bg-gray-50 p-6 rounded-md shadow-inner mt-10">
                 <h2 className="text-xl font-semibold text-primaryColor mb-4">
@@ -191,7 +204,7 @@ const CampaignDetails = () => {
                   </label>
                   <input
                     data-tooltip-id="donate"
-                    data-tooltip-content={`Minimum donation is $${campaign.minDonation}`}
+                    data-tooltip-content={`Minimum donation is $${campaign?.minDonation}`}
                     data-tooltip-place="top"
                     type="number"
                     placeholder="Enter amount"
