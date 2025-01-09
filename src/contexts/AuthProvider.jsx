@@ -29,7 +29,7 @@ const AuthProvider = ({ children }) => {
         const { displayName, email } = user;
         axios
           .post(
-            "http://localhost:4000/jwt",
+            "https://crowdcube-server-nu.vercel.app/jwt",
             { displayName, email },
             { withCredentials: true }
           )
@@ -45,7 +45,7 @@ const AuthProvider = ({ children }) => {
       } else {
         axios
           .post(
-            "http://localhost:4000/clear-cookie",
+            "https://crowdcube-server-nu.vercel.app/clear-cookie",
             {},
             { withCredentials: true }
           )

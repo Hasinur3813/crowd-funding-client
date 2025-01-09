@@ -51,7 +51,7 @@ const Register = () => {
         photoURL: photoURL,
         email: email,
       }));
-      axios.post("http://localhost:4000/users", {
+      axios.post("https://crowdcube-server-nu.vercel.app/users", {
         name,
         email,
         photoURL,

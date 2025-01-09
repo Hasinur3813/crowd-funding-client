@@ -20,7 +20,7 @@ const MyCampaign = () => {
     const fetchCampaigns = async () => {
       try {
         const response = await fetch(
-          `http://localhost:4000/my-campaign/${currentUser.email}`,
+          `https://crowdcube-server-nu.vercel.app/my-campaign/${currentUser.email}`,
           {
             method: "GET",
           }
@@ -47,9 +47,12 @@ const MyCampaign = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await fetch(`http://localhost:4000/my-campaign/${id}`, {
-            method: "DELETE",
-          });
+          await fetch(
+            `https://crowdcube-server-nu.vercel.app/my-campaign/${id}`,
+            {
+              method: "DELETE",
+            }
+          );
 
           const remainingCampaign = campaigns.filter((c) => c._id !== id);
           setCampaigns(remainingCampaign);

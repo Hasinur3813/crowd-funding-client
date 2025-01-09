@@ -14,7 +14,7 @@ const MyDonations = () => {
     const fetchDonations = async () => {
       try {
         const response = await fetch(
-          `http://localhost:4000/my-donations/${currentUser?.email}`,
+          `https://crowdcube-server-nu.vercel.app/my-donations/${currentUser?.email}`,
           {
             method: "GET",
           }

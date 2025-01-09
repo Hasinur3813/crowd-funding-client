@@ -26,7 +26,8 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <HomePage />,
-        loader: () => fetch("http://localhost:4000/running-campaigns"),
+        loader: () =>
+          fetch("https://crowdcube-server-nu.vercel.app/running-campaigns"),
       },
       {
         path: "/signup",
