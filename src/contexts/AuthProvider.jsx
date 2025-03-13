@@ -56,20 +56,8 @@ const AuthProvider = ({ children }) => {
       }
     });
 
-    return () => unsubscribe(); // Cleanup the listener
+    return () => unsubscribe();
   }, []);
-
-  // useEffect(() => {
-  //   const unsubscribe = onAuthStateChanged(auth, (user) => {
-  //     setCurrentUser(user);
-  //     console.log(user?.email);
-  //     setLoading(false);
-  //   });
-
-  //   return () => unsubscribe();
-  // }, []);
-
-  // sign in with google
 
   const signInWithGoogle = () => {
     setLoading(true);
